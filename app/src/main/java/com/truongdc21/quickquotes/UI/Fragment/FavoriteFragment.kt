@@ -19,4 +19,5 @@ class FavoriteFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_favorite, container, false)
     }
+
 }
