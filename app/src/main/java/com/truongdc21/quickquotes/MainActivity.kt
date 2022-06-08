@@ -11,6 +11,7 @@ import com.truongdc21.quickquotes.Utils.ExtensionFragment.replaceFragment
 import com.truongdc21.quickquotes.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     var itemIDBottomNav : Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
