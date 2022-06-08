@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
         <activity
+            android:name=".UI.Activity.AuthorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Activity.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Activity.TagActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Activity.ViewPlayActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
