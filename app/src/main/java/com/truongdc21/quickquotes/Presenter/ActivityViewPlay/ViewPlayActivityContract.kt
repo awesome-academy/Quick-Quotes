@@ -1,4 +1,4 @@
-package com.truongdc21.quickquotes.Presenter.ActivityViewPlay
+package com.truongdc21.quickquotes.presenter.activityViewPlay
 
 interface ViewPlayActivityContract {
 }

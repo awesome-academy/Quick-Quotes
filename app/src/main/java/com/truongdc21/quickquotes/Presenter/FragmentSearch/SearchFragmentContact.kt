@@ -1,4 +1,4 @@
-package com.truongdc21.quickquotes.Presenter.FragmentSearch
+package com.truongdc21.quickquotes.presenter.fragmentSearch
 
 interface SearchFragmentContact {
 }

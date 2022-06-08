@@ -1,4 +1,4 @@
-package com.truongdc21.quickquotes.Utils
+package com.truongdc21.quickquotes.utils
 
 import android.content.ClipData
 import android.content.ClipboardManager
