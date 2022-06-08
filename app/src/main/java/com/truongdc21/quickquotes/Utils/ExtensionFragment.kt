@@ -4,11 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.truongdc21.quickquotes.R
 
-
-    fun FragmentActivity.replaceFragment (fragment : Fragment){
-        this.supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragment_main , fragment)
-            commit()
-        }
+fun FragmentActivity.replaceFragmentBottomNAV (fragment : Fragment){
+    this.supportFragmentManager.beginTransaction().apply {
+        replace(R.id.mainContainer , fragment)
+        commit()
     }
 }

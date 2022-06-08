@@ -17,5 +17,4 @@
         android:id="@+id/acction_favorite"
         android:icon="@drawable/ic_favorite"
         />
-
 </menu>

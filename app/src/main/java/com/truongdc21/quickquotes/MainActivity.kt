@@ -6,8 +6,8 @@ import com.truongdc21.quickquotes.UI.Activity.ViewPlayActivity
 import com.truongdc21.quickquotes.UI.Fragment.FavoriteFragment
 import com.truongdc21.quickquotes.UI.Fragment.HomeFragment
 import com.truongdc21.quickquotes.UI.Fragment.SearchFragment
-import com.truongdc21.quickquotes.Utils.ExtensionActivity.switchActivity
-import com.truongdc21.quickquotes.Utils.ExtensionFragment.replaceFragment
+import com.truongdc21.quickquotes.Utils.replaceFragmentBottomNAV
+import com.truongdc21.quickquotes.Utils.switchActivity
 import com.truongdc21.quickquotes.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -23,22 +23,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun setBottomNav() {
         binding.apply {
-            this@MainActivity.replaceFragment(HomeFragment())
+            this@MainActivity.replaceFragmentBottomNAV(HomeFragment())
             itemIDBottomNav = R.id.acction_home
             bottomNavigationView.setOnItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.acction_home -> {
-                        this@MainActivity.replaceFragment(HomeFragment())
+                        this@MainActivity.replaceFragmentBottomNAV(HomeFragment())
                         itemIDBottomNav = item.itemId
                     }
                     R.id.acction_viewplay -> this@MainActivity.switchActivity(ViewPlayActivity())
 
                     R.id.acction_search -> {
-                        this@MainActivity.replaceFragment(SearchFragment())
+                        this@MainActivity.replaceFragmentBottomNAV(SearchFragment())
                         itemIDBottomNav = item.itemId
                     }
                     R.id.acction_favorite -> {
-                        this@MainActivity.replaceFragment(FavoriteFragment())
+                        this@MainActivity.replaceFragmentBottomNAV(FavoriteFragment())
                         itemIDBottomNav = item.itemId
                     }
                 }
