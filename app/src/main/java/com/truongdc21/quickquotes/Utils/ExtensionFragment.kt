@@ -4,7 +4,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.truongdc21.quickquotes.R
 
-object ExtensionFragment {
 
     fun FragmentActivity.replaceFragment (fragment : Fragment){
         this.supportFragmentManager.beginTransaction().apply {
