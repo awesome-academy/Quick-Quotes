@@ -5,7 +5,6 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.widget.Toast
 
-object ExtensionContext {
 
     fun Context.showToast (string : String){
         Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
