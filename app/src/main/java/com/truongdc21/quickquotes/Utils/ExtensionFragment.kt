@@ -1,4 +1,4 @@
-package com.truongdc21.quickquotes.Utils
+package com.truongdc21.quickquotes.utils
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

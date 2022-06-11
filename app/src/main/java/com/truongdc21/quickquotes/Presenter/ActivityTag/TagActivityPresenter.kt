@@ -1,4 +1,4 @@
-package com.truongdc21.quickquotes.Presenter.ActivityTag
+package com.truongdc21.quickquotes.presenter.activityTag
 
 class TagActivityPresenter {
 }

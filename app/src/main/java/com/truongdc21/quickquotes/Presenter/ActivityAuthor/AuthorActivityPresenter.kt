@@ -1,4 +1,5 @@
-package com.truongdc21.quickquotes.Presenter.ActivityAuthor
+package com.truongdc21.quickquotes.presenter.activityAuthor
 
-class AuthorActivityPresenter {
+class AuthorActivityPresenter() {
+
 }

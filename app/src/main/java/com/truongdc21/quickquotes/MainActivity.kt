@@ -2,12 +2,12 @@ package com.truongdc21.quickquotes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.truongdc21.quickquotes.UI.Activity.ViewPlayActivity
-import com.truongdc21.quickquotes.UI.Fragment.FavoriteFragment
-import com.truongdc21.quickquotes.UI.Fragment.HomeFragment
-import com.truongdc21.quickquotes.UI.Fragment.SearchFragment
-import com.truongdc21.quickquotes.Utils.replaceFragmentBottomNAV
-import com.truongdc21.quickquotes.Utils.switchActivity
+import com.truongdc21.quickquotes.ui.activity.ViewPlayActivity
+import com.truongdc21.quickquotes.ui.fragment.FavoriteFragment
+import com.truongdc21.quickquotes.ui.fragment.HomeFragment
+import com.truongdc21.quickquotes.ui.fragment.SearchFragment
+import com.truongdc21.quickquotes.utils.replaceFragmentBottomNAV
+import com.truongdc21.quickquotes.utils.switchActivity
 import com.truongdc21.quickquotes.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

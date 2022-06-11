@@ -1,4 +1,4 @@
-package com.truongdc21.quickquotes.Presenter.FragmentFavorite
+package com.truongdc21.quickquotes.presenter.fragmentFavorite
 
 class FavoriteFragmentPresenter {
 }

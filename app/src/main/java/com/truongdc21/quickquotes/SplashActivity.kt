@@ -3,7 +3,7 @@ package com.truongdc21.quickquotes
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.truongdc21.quickquotes.Utils.setStatusBar
+import com.truongdc21.quickquotes.utils.setStatusBar
 import kotlinx.coroutines.*
 
 class SplashActivity : AppCompatActivity() {
