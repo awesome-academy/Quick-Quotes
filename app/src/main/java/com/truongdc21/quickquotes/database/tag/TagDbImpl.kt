@@ -25,7 +25,6 @@ class TagDbImpl(database: MyDatabaseHelper) : TagDaoDb {
 
     override suspend fun deleteTag(id: Int) {
         dbWrite.delete(ConstanceDb.TABLE_NAME_TAG, "id =?", arrayOf(id.toString()))
-        dbWrite.close()
     }
 
     override suspend fun readTag(): List<Tag> {

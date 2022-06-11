@@ -7,7 +7,6 @@ import com.truongdc21.quickquotes.data.source.remote.OnRemoteResultListener
 interface QuotesDataSource {
 
     interface Local {
-
         fun insertQuotes (quotes: Quotes , listener: OnLocalResultListener<Unit>)
         fun updateQuotes (quotes: Quotes , id : Int , listener: OnLocalResultListener<Unit>)
         fun deleteQuotes (id : Int , listener: OnLocalResultListener<Unit>)
@@ -15,7 +14,6 @@ interface QuotesDataSource {
     }
 
     interface Remote {
-
         fun getApiQuotesList (listener : OnRemoteResultListener<List<Quotes>>)
     }
 }

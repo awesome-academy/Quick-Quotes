@@ -5,7 +5,7 @@ import com.truongdc21.quickquotes.database.ConstanceDb
 import com.truongdc21.quickquotes.database.MyDatabaseHelper
 import com.truongdc21.quickquotes.data.model.Author
 
-class AuthorDbImpl(database: MyDatabaseHelper) : AuthorDaoDb {
+class AuthorDbImpl(database: MyDatabaseHelper): AuthorDaoDb {
 
     val dbRead = database.readableDatabase
     val dbWrite = database.writableDatabase
@@ -36,7 +36,6 @@ class AuthorDbImpl(database: MyDatabaseHelper) : AuthorDaoDb {
             "${ConstanceDb.COLUMN_ID}=?",
             arrayOf(id.toString())
         )
-        dbWrite.close()
     }
 
     override suspend fun readAuthor(): MutableList<Author> {

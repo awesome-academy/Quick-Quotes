@@ -7,13 +7,11 @@ import com.truongdc21.quickquotes.data.source.QuotesDataSource
 class QuotesRemoteSource : QuotesDataSource.Remote{
 
     override fun getApiQuotesList(listener: OnRemoteResultListener<List<Quotes>>) {
-        ApiConstance.parseJsontoQuotes(listener)
+            ApiConstance.parseJsontoQuotes(listener)
     }
 
     companion object {
-        private var instance : QuotesRemoteSource? = null
-        fun getInstance() = synchronized(this){
-            instance ?: QuotesRemoteSource().also { instance = it }
-        }
+        private var instance: QuotesRemoteSource? = null
+        fun getInstance() = instance ?: QuotesRemoteSource().also { instance = it }
     }
 }

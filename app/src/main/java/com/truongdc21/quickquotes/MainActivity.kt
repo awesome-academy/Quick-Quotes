@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setBottomNav() {
         binding.apply {
-            this@MainActivity.replaceFragmentBottomNAV(HomeFragment())
             itemIDBottomNav = R.id.acction_home
             bottomNavigationView.setOnItemSelectedListener { item ->
                 when (item.itemId) {
@@ -51,4 +50,5 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         binding.bottomNavigationView.selectedItemId = itemIDBottomNav
     }
+
 }

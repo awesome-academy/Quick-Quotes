@@ -7,12 +7,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AuthorLocalSource (private val authorDaodb : AuthorDaoDb ): AuthorDataSource.Local {
-
+class AuthorLocalSource(private val authorDaodb : AuthorDaoDb ): AuthorDataSource.Local {
     override fun insertAuthor(author: String, listener: OnLocalResultListener<Unit>) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 authorDaodb.insertAuthor(author)
+                listener.onSuccess(Unit)
             }
             catch (e : Exception){
                 listener.onError(e)
@@ -24,6 +24,7 @@ class AuthorLocalSource (private val authorDaodb : AuthorDaoDb ): AuthorDataSour
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 authorDaodb.updateAuthor(author , id)
+                listener.onSuccess(Unit)
             }
             catch (e : Exception){
                 listener.onError(e)
@@ -35,6 +36,7 @@ class AuthorLocalSource (private val authorDaodb : AuthorDaoDb ): AuthorDataSour
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 authorDaodb.deleteAuthor(id)
+                listener.onSuccess(Unit)
             }
             catch (e : Exception){
                 listener.onError(e)
@@ -56,7 +58,7 @@ class AuthorLocalSource (private val authorDaodb : AuthorDaoDb ): AuthorDataSour
     companion object {
         private var instance: AuthorLocalSource? = null
 
-        fun getInstance (authorDaodb: AuthorDaoDb) = synchronized(this) {
+        fun getInstance(authorDaodb: AuthorDaoDb) = synchronized(this) {
             instance ?: AuthorLocalSource(authorDaodb).also { instance = it }
         }
     }

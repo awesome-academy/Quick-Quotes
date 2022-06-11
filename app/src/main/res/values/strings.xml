@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Quick Quotes</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="copy">Copy</string>
+    <string name="addFavoriteSuccesss">Add to favorite succsess</string>
+    <string name="addFavoriteFail">Add to favorite fail. Please try again !</string>
+
+    <string name="deleteFavoriteSuccesss">Remove favorite succsess</string>
+    <string name="deleteFavoriteFail">Remove favorite fail. Please try again !</string>
 </resources>
