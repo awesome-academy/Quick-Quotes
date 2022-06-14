@@ -33,7 +33,7 @@ class TagRepository (
     companion object {
         private var instance: TagRepository? = null
 
-        fun getInstance (local: TagDataSource.Local, remote: TagDataSource.Remote){
+        fun getInstance(local: TagDataSource.Local, remote: TagDataSource.Remote){
             synchronized(this){
                 instance ?: TagRepository(local , remote).also { instance = it }
             }

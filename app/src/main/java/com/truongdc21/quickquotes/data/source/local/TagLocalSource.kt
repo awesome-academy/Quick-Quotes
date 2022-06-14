@@ -7,12 +7,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TagLocalSource (private val tagDaoDb: TagDaoDb): TagDataSource.Local {
+class TagLocalSource(private val tagDaoDb: TagDaoDb): TagDataSource.Local {
 
     override fun insertTag(tag: String, listener: OnLocalResultListener<Unit>) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 tagDaoDb.insertTag(tag)
+                listener.onSuccess(Unit)
             }catch (e: Exception){
                 listener.onError(e)
             }
@@ -23,6 +24,7 @@ class TagLocalSource (private val tagDaoDb: TagDaoDb): TagDataSource.Local {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 tagDaoDb.updateTag(tag , id)
+                listener.onSuccess(Unit)
             }catch (e: Exception){
                 listener.onError(e)
             }
@@ -33,6 +35,7 @@ class TagLocalSource (private val tagDaoDb: TagDaoDb): TagDataSource.Local {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 tagDaoDb.deleteTag(id)
+                listener.onSuccess(Unit)
             }catch (e: Exception){
                 listener.onError(e)
             }

@@ -38,7 +38,6 @@ class QuotesDbImpl(database: MyDatabaseHelper) : QuotesDaoDb {
             "${ConstanceDb.COLUMN_ID}=?",
             arrayOf(id.toString())
         )
-        dbWrite.close()
     }
 
     override suspend fun readQuotes(): List<Quotes> {
@@ -49,7 +48,7 @@ class QuotesDbImpl(database: MyDatabaseHelper) : QuotesDaoDb {
             if (it.count != 0) {
                 while (it.moveToNext()) {
                     val quotes =
-                        Quotes(it.getInt(0), it.getString(1), it.getString(2), it.getString(3))
+                        Quotes(it.getInt(0), it.getString(1), it.getString(2), it.getString(3) , "")
                     mListQuotes.add(quotes)
                 }
             }

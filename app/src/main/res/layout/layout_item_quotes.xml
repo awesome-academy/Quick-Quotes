@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_10">
+
+        <ImageView
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:background="@drawable/ic_author" />
+
+        <TextView
+            android:id="@+id/itemNameAuthor"
+            android:layout_width="362dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:maxLength="24"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/itemImgMore"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:background="@drawable/ic_more" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/itemIMGHomeQuotes"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_0"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@id/tvItemQuotes"
+            app:layout_constraintEnd_toEndOf="@id/tvItemQuotes"
+            app:layout_constraintStart_toStartOf="@id/tvItemQuotes"
+            app:layout_constraintTop_toTopOf="@id/tvItemQuotes" />
+
+        <View
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_0"
+            android:background="@color/black_transparent_40"
+            app:layout_constraintBottom_toBottomOf="@id/itemIMGHomeQuotes"
+            app:layout_constraintEnd_toEndOf="@id/itemIMGHomeQuotes"
+            app:layout_constraintStart_toStartOf="@id/itemIMGHomeQuotes"
+            app:layout_constraintTop_toTopOf="@id/itemIMGHomeQuotes" />
+
+        <TextView
+            android:background="@color/black_transparent_40"
+            android:id="@+id/tvItemQuotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/abril_fatface"
+            android:paddingStart="@dimen/dp_25"
+            android:paddingEnd="@dimen/dp_25"
+            android:paddingTop="@dimen/dp_50"
+            android:paddingBottom="@dimen/dp_50"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_22"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_10">
+
+        <ImageView
+            android:id="@+id/imgItemViewPlay"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:background="@drawable/ic_viewplay" />
+
+        <ImageView
+            android:id="@+id/imgItemCoppy"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:layout_marginStart="@dimen/dp_15"
+            android:background="@drawable/ic_copy" />
+
+        <ImageView
+            android:id="@+id/imgItemFavorite"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:layout_marginStart="@dimen/dp_15"
+            android:background="@drawable/ic_favorite" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/itemTvTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLength="24"
+            android:text="" />
+    </LinearLayout>
+</LinearLayout>

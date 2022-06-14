@@ -5,9 +5,9 @@ import com.truongdc21.quickquotes.data.source.QuotesDataSource
 import com.truongdc21.quickquotes.data.source.local.OnLocalResultListener
 import com.truongdc21.quickquotes.data.source.remote.OnRemoteResultListener
 
-class QuotesRepository (
-    private val local : QuotesDataSource.Local,
-    private val remote : QuotesDataSource.Remote
+class QuotesRepository(
+    private val remote : QuotesDataSource.Remote,
+    private val local : QuotesDataSource.Local
     ): QuotesDataSource.Remote , QuotesDataSource.Local{
 
     override fun insertQuotes(quotes: Quotes, listener: OnLocalResultListener<Unit>) {
@@ -27,17 +27,15 @@ class QuotesRepository (
     }
 
     override fun getApiQuotesList(listener: OnRemoteResultListener<List<Quotes>>) {
-       remote.getApiQuotesList(listener)
+        remote.getApiQuotesList(listener)
     }
 
     companion object {
         private var instance: QuotesRepository? = null
 
-        fun getInstance (local: QuotesDataSource.Local, remote: QuotesDataSource.Remote){
-            synchronized(this){
-                instance ?: QuotesRepository(local , remote).also { instance = it }
-            }
-        }
+        fun getInstace(
+            remote: QuotesDataSource.Remote,
+            local: QuotesDataSource.Local
+        ) = instance ?: QuotesRepository(remote, local).also { instance = it }
     }
-
 }

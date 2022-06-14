@@ -5,10 +5,9 @@ import com.truongdc21.quickquotes.data.source.AuthorDataSource
 import com.truongdc21.quickquotes.data.source.local.OnLocalResultListener
 import com.truongdc21.quickquotes.data.source.remote.OnRemoteResultListener
 
-class AuthorRepository (
+class AuthorRepository(
     private val local : AuthorDataSource.Local,
     private val remote : AuthorDataSource.Remote
-
  ) : AuthorDataSource.Local , AuthorDataSource.Remote{
 
     override fun insertAuthor(author: String, listener: OnLocalResultListener<Unit>) {
@@ -34,7 +33,7 @@ class AuthorRepository (
     companion object {
         private var instance: AuthorRepository? = null
 
-        fun getInstance (local: AuthorDataSource.Local, remote: AuthorDataSource.Remote){
+        fun getInstance(local: AuthorDataSource.Local, remote: AuthorDataSource.Remote){
             synchronized(this){
                 instance ?: AuthorRepository(local , remote).also { instance = it }
             }
