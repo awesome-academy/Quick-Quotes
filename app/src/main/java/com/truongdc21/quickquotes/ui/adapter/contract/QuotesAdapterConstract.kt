@@ -1,4 +1,4 @@
-package com.truongdc21.quickquotes.ui.adapter
+package com.truongdc21.quickquotes.ui.adapter.contract
 
 import com.truongdc21.quickquotes.data.model.Quotes
 

@@ -1,4 +1,127 @@
 package com.truongdc21.quickquotes.presenter.fragmentSearch
 
-class SearchFragmentPresenter {
+import com.truongdc21.quickquotes.data.model.Quotes
+import com.truongdc21.quickquotes.data.model.Search
+import com.truongdc21.quickquotes.data.repository.SearchRepository
+import com.truongdc21.quickquotes.data.source.local.OnLocalResultListener
+import com.truongdc21.quickquotes.data.source.remote.OnRemoteResultListener
+import com.truongdc21.quickquotes.database.ConstanceDb
+import com.truongdc21.quickquotes.utils.Constant
+import kotlinx.coroutines.*
+import java.lang.Exception
+
+class SearchFragmentPresenter(
+    private val mRepo : SearchRepository
+    ) : SearchFragmentContact.Presenter{
+
+    private var mView : SearchFragmentContact.View? = null
+
+    private var mlistSearch = mutableListOf<Search>()
+    private var mlistSearchLocal = mutableListOf<Search>()
+    private var isQuotes : Boolean = false
+    private var isAuthor : Boolean = false
+    private var isTag : Boolean = false
+
+    override fun onStart() {
+        getListSearchAPI()
+        getListSearchHistory()
+    }
+
+    override fun onStop() {
+        getListSearchAPI()
+    }
+
+    override fun setView(view: SearchFragmentContact.View?) {
+        this.mView = view
+    }
+
+    override fun getListSearchAPI() {
+        if (isQuotes || isAuthor || isTag) {
+            mView?.setAdapterListAPI(mlistSearch)
+        } else {
+            CoroutineScope(Dispatchers.IO).launch{
+                launch {
+                    mRepo.getListQuotes(object : OnRemoteResultListener<List<Quotes>>{
+                        override fun onSuccess(data: List<Quotes>) {
+                            for (i in data){
+                                mlistSearch.add(Search(0 , ConstanceDb.COLUMN_QUOTES , i.mQuotes , Constant.REMOTE))
+                            }
+                            mView?.setAdapterListAPI(mlistSearch)
+                            isQuotes = true
+                        }
+                        override fun onError(exception: Exception?) { mView?.onError() }
+                    })
+                }
+
+                launch {
+                    mRepo.getListAuthor(object : OnRemoteResultListener<List<String>> {
+                        override fun onSuccess(data: List<String>) {
+                            for (author in data){
+                                mlistSearch.add(Search(0, ConstanceDb.COLUMN_AUTHOR, author, Constant.REMOTE))
+                            }
+                            mView?.setAdapterListAPI(mlistSearch)
+                            isAuthor = true
+                        }
+                        override fun onError(exception: Exception?) { mView?.onError() }
+                    })
+                }
+
+                launch {
+                    mRepo.getListTag(object : OnRemoteResultListener<List<String>> {
+                        override fun onSuccess(data: List<String>) {
+                            for (tag in data){
+                                mlistSearch.add(Search(0, ConstanceDb.COLUMN_TAG, tag, Constant.REMOTE))
+                            }
+                            mView?.setAdapterListAPI(mlistSearch)
+                            isTag = true
+                        }
+                        override fun onError(exception: Exception?) { mView?.onError() }
+                    })
+                }
+            }
+        }
+
+    }
+
+    override fun getListSearchHistory() {
+       mRepo.readSearch(object : OnLocalResultListener<List<Search>>{
+           override fun onSuccess(data: List<Search>) {
+               mView?.setAdapterListHistory(data)
+           }
+           override fun onError(exception: Exception?) {}
+       })
+    }
+
+    override fun insertSearchHistory(search: Search) {
+        mRepo.readSearch(object : OnLocalResultListener<List<Search>>{
+            override fun onSuccess(data: List<Search>) {
+                for (i in data){
+                    if (i.text == search.text){
+                        i.id?.let {
+                            mRepo.deleteSearch(it , object: OnLocalResultListener<Unit>{
+                                override fun onSuccess(data: Unit) { getListSearchHistory() }
+                                override fun onError(exception: Exception?) {}
+                            })
+                        }
+                    }
+                }
+                mRepo.insertSearch(search , object : OnLocalResultListener<Unit>{
+                    override fun onSuccess(data: Unit) {}
+                    override fun onError(exception: Exception?) {}
+                })
+            }
+            override fun onError(exception: Exception?) {}
+        })
+    }
+
+    override fun deleteSearchHistory(id : Int) {
+        mRepo.deleteSearch(id , object: OnLocalResultListener<Unit>{
+            override fun onSuccess(data: Unit) {
+                getListSearchHistory()
+                mView?.removeHistorySuccess()
+            }
+
+            override fun onError(exception: Exception?) {}
+        })
+    }
 }

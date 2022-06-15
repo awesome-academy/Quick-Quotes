@@ -2,10 +2,6 @@ package com.truongdc21.quickquotes.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.text.method.TextKeyListener.clear
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,10 +16,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.truongdc21.quickquotes.R
+import com.truongdc21.quickquotes.ui.adapter.contract.QuotesAdapterConstract
 
 class QuotesAdapter(
     private val context: Context
-    ): RecyclerView.Adapter<QuotesAdapter.QuotesViewHolder>()  {
+    ): RecyclerView.Adapter<QuotesAdapter.QuotesViewHolder>() {
 
     private var mListQuotes = mutableListOf<Quotes>()
     private var mListQuotesLocal = mutableListOf<Quotes>()
@@ -127,4 +124,5 @@ class QuotesAdapter(
             quoteAdapterContract?.clickItemFavorite(itemQuotes)
         }
     }
+
 }

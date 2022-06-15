@@ -14,12 +14,14 @@ class MyDatabaseHelper(
         db?.execSQL(ConstanceDb.QUERY_CREATE_QUOTES)
         db?.execSQL(ConstanceDb.QUERY_CREATE_AUTHOR)
         db?.execSQL(ConstanceDb.QUERY_CREATE_TAG)
+        db?.execSQL(ConstanceDb.QUERY_CREATE_SEARCH)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
         db?.execSQL(" DROP TABLE IF EXISTS " + ConstanceDb.TABLE_NAME_QUOTES)
         db?.execSQL(" DROP TABLE IF EXISTS " + ConstanceDb.TABLE_NAME_AUTHOR)
         db?.execSQL(" DROP TABLE IF EXISTS " + ConstanceDb.TABLE_NAME_TAG)
+        db?.execSQL(" DROP TABLE IF EXISTS " + ConstanceDb.TABLE_NAME_SEARCH)
         onCreate(db)
     }
 

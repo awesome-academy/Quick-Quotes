@@ -7,4 +7,8 @@
 
     <string name="deleteFavoriteSuccesss">Remove favorite succsess</string>
     <string name="deleteFavoriteFail">Remove favorite fail. Please try again !</string>
+    <string name="recent_search_result">Recent search result </string>
+    <string name="see_search_result">See search result ..</string>
+    <string name="remove_success">Remove Success</string>
+
 </resources>

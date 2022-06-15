@@ -1,16 +1,12 @@
 package com.truongdc21.quickquotes.api
 
 import android.net.Uri
-import android.util.Log
-import com.truongdc21.quickquotes.data.model.Quotes
 import com.truongdc21.quickquotes.data.source.remote.OnRemoteResultListener
 import kotlinx.coroutines.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.net.HttpURLConnection
-import java.net.URI
 import java.net.URL
-import kotlin.math.log
 
 object ApiConstance {
     const val URL_QUOTES = "https://goquotes-api.herokuapp.com/api/v1/all/quotes"
@@ -63,31 +59,6 @@ object ApiConstance {
         val data =  connection.inputStream.bufferedReader().readText()
         val json = JSONObject(data)
         return json.optJSONArray(NAME_OBJECT_JSON_ARRAY)
-    }
-
-    fun parseJsontoQuotes(listener: OnRemoteResultListener<List<Quotes>>) {
-        CoroutineScope(Job() + Dispatchers.IO).launch{
-            try {
-                val uri = getURLformAPIQuotesRandom(URL_QUOTES_RANDOM)
-                val jsonArrayQuotes = connectAPI(uri, NAME_OBJECT_JSON_ARRAY_QUOTES)
-                withContext(Dispatchers.Default){
-                    val listImage = APiImage.getIMGfromMockapi(APiImage.URL_IMAGE)
-                    val listQuotes = mutableListOf<Quotes>()
-                    for (i in 0 until jsonArrayQuotes.length()){
-                        val jsonQuotes = jsonArrayQuotes.optJSONObject(i)
-                        val srtQuotes = jsonQuotes.optString(QUOTES_TEXT)
-                        val srtAuthor = jsonQuotes.optString(QUOTES_AUTHOR)
-                        val srtTag = jsonQuotes.optString(QUOTES_TAG)
-                        val random1 = (0..listImage.size-1).shuffled().last()
-                        val quotes = Quotes( 0,srtQuotes, srtAuthor, srtTag, listImage[random1])
-                        listQuotes.add(quotes)
-                    }
-                    withContext(Dispatchers.Main){ listener.onSuccess(listQuotes) }
-                }
-            }catch (e : Exception){
-                withContext(Dispatchers.Main){listener.onError(e)}
-            }
-        }
     }
 
     fun parseJsontoAuthor(listener: OnRemoteResultListener<MutableList<String>>) {

@@ -17,7 +17,7 @@ import com.truongdc21.quickquotes.ui.activity.AuthorActivity
 import com.truongdc21.quickquotes.ui.activity.TagActivity
 import com.truongdc21.quickquotes.ui.activity.ViewPlayActivity
 import com.truongdc21.quickquotes.ui.adapter.QuotesAdapter
-import com.truongdc21.quickquotes.ui.adapter.QuotesAdapterConstract
+import com.truongdc21.quickquotes.ui.adapter.contract.QuotesAdapterConstract
 import com.truongdc21.quickquotes.utils.copyToClipboard
 import com.truongdc21.quickquotes.utils.showToast
 import com.truongdc21.quickquotes.utils.switchActivity
