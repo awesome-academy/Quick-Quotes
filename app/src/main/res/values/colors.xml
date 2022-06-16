@@ -10,6 +10,8 @@
 
     <color name="green">#9ACD32</color>
     <color name="red">#FA8072</color>
+    <color name="blue">#1976D2</color>
+    <color name="gray">#9D9D9E</color>
 
     <color name="splash_bgr">#B1D4A5</color>
 

@@ -7,7 +7,8 @@ import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 
-object APiImage {
+object APiLoadImage {
+
     const val URL_IMAGE = "https://62a4325a47e6e400638de307.mockapi.io/imagefromFireBase"
 
     fun getIMGfromMockapi(URL: String ) : List<String> {
