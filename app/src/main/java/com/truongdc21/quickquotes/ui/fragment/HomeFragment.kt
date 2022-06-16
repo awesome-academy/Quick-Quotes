@@ -94,7 +94,7 @@ class HomeFragment :
         }
     }
 
-    override fun setAdapterListLocal(mListQuotesLocal: List<Quotes>) {
+    override fun showAdapterListLocal(mListQuotesLocal: List<Quotes>) {
         lifecycleScope.launch(Dispatchers.Main){
             binding.apply {
                 adapterQuotes.setListQuotesLocal(mListQuotesLocal)

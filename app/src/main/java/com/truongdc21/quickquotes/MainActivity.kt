@@ -9,6 +9,7 @@ import com.truongdc21.quickquotes.ui.fragment.SearchFragment
 import com.truongdc21.quickquotes.utils.replaceFragmentBottomNAV
 import com.truongdc21.quickquotes.utils.switchActivity
 import com.truongdc21.quickquotes.databinding.ActivityMainBinding
+import com.truongdc21.quickquotes.ui.fragment.FavoriteViewpagerFragment
 
 class MainActivity : AppCompatActivity() {
     
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                         itemIDBottomNav = item.itemId
                     }
                     R.id.acction_favorite -> {
-                        this@MainActivity.replaceFragmentBottomNAV(FavoriteFragment())
+                        this@MainActivity.replaceFragmentBottomNAV(FavoriteViewpagerFragment())
                         itemIDBottomNav = item.itemId
                     }
                 }
@@ -50,5 +51,4 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         binding.bottomNavigationView.selectedItemId = itemIDBottomNav
     }
-
 }

@@ -1,13 +1,14 @@
 package com.truongdc21.quickquotes.data.repository
 
 import com.truongdc21.quickquotes.data.model.Tag
+import com.truongdc21.quickquotes.data.source.AuthorDataSource
 import com.truongdc21.quickquotes.data.source.TagDataSource
 import com.truongdc21.quickquotes.data.source.local.OnLocalResultListener
 import com.truongdc21.quickquotes.data.source.remote.OnRemoteResultListener
 
 class TagRepository (
-    private val local : TagDataSource.Local,
-    private val remote : TagDataSource.Remote
+    private val remote : TagDataSource.Remote,
+    private val local : TagDataSource.Local
     ): TagDataSource.Local , TagDataSource.Remote{
 
     override fun insertTag(tag: String, listener: OnLocalResultListener<Unit>) {
@@ -32,11 +33,9 @@ class TagRepository (
 
     companion object {
         private var instance: TagRepository? = null
-
-        fun getInstance(local: TagDataSource.Local, remote: TagDataSource.Remote){
-            synchronized(this){
-                instance ?: TagRepository(local , remote).also { instance = it }
-            }
-        }
+        fun getInstace(
+            remote: TagDataSource.Remote,
+            local: TagDataSource.Local) = TagRepository.instance
+            ?: TagRepository(remote, local).also { TagRepository.instance = it }
     }
 }

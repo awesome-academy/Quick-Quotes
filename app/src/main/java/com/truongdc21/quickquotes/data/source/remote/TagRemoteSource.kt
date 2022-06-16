@@ -8,4 +8,12 @@ class TagRemoteSource : TagDataSource.Remote {
     override fun getApiTagList(listener: OnRemoteResultListener<List<String>>) {
         ApiConstance.parseJsontoTag(listener)
     }
+
+    companion object {
+        private var instance: TagRemoteSource? = null
+
+        fun getInstance() = synchronized(this){
+            instance ?: TagRemoteSource().also { instance = it }
+        }
+    }
 }

@@ -10,5 +10,5 @@ interface AuthorDaoDb {
 
     suspend fun deleteAuthor(id : Int)
 
-    suspend fun readAuthor(): MutableList<Author>
+    suspend fun readAuthor(): List<Author>
 }
