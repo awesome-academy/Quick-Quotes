@@ -53,7 +53,7 @@ class QuotesDbImpl(database: MyDatabaseHelper) : QuotesDaoDb {
                 }
             }
         }
-        return mListQuotes
+        return mListQuotes.reversed()
     }
 
     companion object {

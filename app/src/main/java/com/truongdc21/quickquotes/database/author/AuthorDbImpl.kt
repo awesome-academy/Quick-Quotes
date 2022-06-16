@@ -38,19 +38,19 @@ class AuthorDbImpl(database: MyDatabaseHelper): AuthorDaoDb {
         )
     }
 
-    override suspend fun readAuthor(): MutableList<Author> {
+    override suspend fun readAuthor(): List<Author> {
         val mListAuthor = mutableListOf<Author>()
         val query = "SELECT * FROM " + ConstanceDb.TABLE_NAME_AUTHOR
         val cursor = dbRead.rawQuery(query, null)
         cursor?.let {
             if (it.count != 0) {
                 while (it.moveToNext()) {
-                    val author = Author(it.getString(0), it.getString(1))
+                    val author = Author(it.getInt(0), it.getString(1))
                     mListAuthor.add(author)
                 }
             }
         }
-        return mListAuthor
+        return mListAuthor.reversed()
     }
 
     companion object {

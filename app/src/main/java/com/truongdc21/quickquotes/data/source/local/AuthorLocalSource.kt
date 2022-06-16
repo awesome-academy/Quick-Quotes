@@ -44,7 +44,7 @@ class AuthorLocalSource(private val authorDaodb : AuthorDaoDb ): AuthorDataSourc
         }
     }
 
-    override fun readAuthor(listener: OnLocalResultListener<MutableList<Author>>) {
+    override fun readAuthor(listener: OnLocalResultListener<List<Author>>) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 listener.onSuccess(authorDaodb.readAuthor())

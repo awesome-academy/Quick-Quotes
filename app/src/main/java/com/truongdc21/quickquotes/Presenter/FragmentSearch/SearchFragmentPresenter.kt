@@ -15,9 +15,7 @@ class SearchFragmentPresenter(
     ) : SearchFragmentContact.Presenter{
 
     private var mView : SearchFragmentContact.View? = null
-
     private var mlistSearch = mutableListOf<Search>()
-    private var mlistSearchLocal = mutableListOf<Search>()
     private var isQuotes : Boolean = false
     private var isAuthor : Boolean = false
     private var isTag : Boolean = false
@@ -120,7 +118,6 @@ class SearchFragmentPresenter(
                 getListSearchHistory()
                 mView?.removeHistorySuccess()
             }
-
             override fun onError(exception: Exception?) {}
         })
     }
