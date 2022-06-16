@@ -16,4 +16,5 @@
     <color name="splash_bgr">#B1D4A5</color>
 
     <color name="black_transparent_40">#40000000</color>
+    <color name="splash_transparent">#80B1D4A5</color>
 </resources>

@@ -18,4 +18,5 @@
     <string name="author">Author</string>
     <string name="tag">Tag</string>
     <string name="list_isempty">List is Empty</string>
+    <string name="cross">--</string>
 </resources>
