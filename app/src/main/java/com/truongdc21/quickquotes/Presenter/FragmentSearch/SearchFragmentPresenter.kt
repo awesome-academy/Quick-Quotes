@@ -35,7 +35,7 @@ class SearchFragmentPresenter(
 
     override fun getListSearchAPI() {
         if (isQuotes || isAuthor || isTag) {
-            mView?.setAdapterListAPI(mlistSearch)
+            mView?.showAdapterListAPI(mlistSearch)
         } else {
             CoroutineScope(Dispatchers.IO).launch{
                 launch {
@@ -44,7 +44,7 @@ class SearchFragmentPresenter(
                             for (i in data){
                                 mlistSearch.add(Search(0 , ConstanceDb.COLUMN_QUOTES , i.mQuotes , Constant.REMOTE))
                             }
-                            mView?.setAdapterListAPI(mlistSearch)
+                            mView?.showAdapterListAPI(mlistSearch)
                             isQuotes = true
                         }
                         override fun onError(exception: Exception?) { mView?.onError() }
@@ -57,7 +57,7 @@ class SearchFragmentPresenter(
                             for (author in data){
                                 mlistSearch.add(Search(0, ConstanceDb.COLUMN_AUTHOR, author, Constant.REMOTE))
                             }
-                            mView?.setAdapterListAPI(mlistSearch)
+                            mView?.showAdapterListAPI(mlistSearch)
                             isAuthor = true
                         }
                         override fun onError(exception: Exception?) { mView?.onError() }
@@ -70,7 +70,7 @@ class SearchFragmentPresenter(
                             for (tag in data){
                                 mlistSearch.add(Search(0, ConstanceDb.COLUMN_TAG, tag, Constant.REMOTE))
                             }
-                            mView?.setAdapterListAPI(mlistSearch)
+                            mView?.showAdapterListAPI(mlistSearch)
                             isTag = true
                         }
                         override fun onError(exception: Exception?) { mView?.onError() }
@@ -84,7 +84,7 @@ class SearchFragmentPresenter(
     override fun getListSearchHistory() {
        mRepo.readSearch(object : OnLocalResultListener<List<Search>>{
            override fun onSuccess(data: List<Search>) {
-               mView?.setAdapterListHistory(data)
+               mView?.showAdapterListHistory(data)
            }
            override fun onError(exception: Exception?) {}
        })

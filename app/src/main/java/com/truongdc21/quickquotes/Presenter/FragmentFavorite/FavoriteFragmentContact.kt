@@ -25,12 +25,20 @@ interface FavoriteFragmentContact {
     }
 
     interface View {
+<<<<<<< HEAD
+<<<<<<< HEAD
+        
+=======
 
-        fun setAdapterQuotes(mlIst: List<Quotes>)
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
+=======
 
-        fun setAdapterAuthor(mList: List<Author>)
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
+        fun showAdapterQuotes(mlIst: List<Quotes>)
 
-        fun setAdapterTag(mList : List<Tag>)
+        fun showAdapterAuthor(mList: List<Author>)
+
+        fun showAdapterTag(mList : List<Tag>)
 
         fun removeSuccess (message: String)
 

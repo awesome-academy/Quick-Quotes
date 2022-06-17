@@ -74,6 +74,20 @@ class FavoriteAdapter(
         }
     }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+    private fun View.setClickItem(quotes: Quotes? , author: Author? , tag: Tag? , position: Int?){
+        when (mKey){
+            Constant.QUOTES -> {
+                this.setOnClickListener {
+                    quotes?.let {
+                        position?.let {
+                            clickItem.clickItemQuotes(mlistQuotes, it )
+                        }
+                    }
+=======
+=======
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
     private fun View.setClickItem(quotes: Quotes? , author: Author? , tag: Tag?){
         when (mKey){
             Constant.QUOTES -> {
@@ -81,6 +95,10 @@ class FavoriteAdapter(
                   quotes?.let {
                       clickItem.clickItemQuotes(it)
                   }
+<<<<<<< HEAD
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
+=======
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
                 }
             }
 
@@ -102,7 +120,15 @@ class FavoriteAdapter(
         }
     }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+    fun setDataQuotes(mList : List<Quotes>, key : String){
+=======
     fun setDataQuotes(mList : List<Quotes> , key : String){
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
+=======
+    fun setDataQuotes(mList : List<Quotes> , key : String){
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
         this.mlistQuotes.apply {
             clear()
             addAll(mList)
@@ -120,7 +146,15 @@ class FavoriteAdapter(
         notifyDataSetChanged()
     }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+    fun setDataTag(mList : List<Tag>, key: String){
+=======
     fun setDataTag(mList : List<Tag> , key: String){
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
+=======
+    fun setDataTag(mList : List<Tag> , key: String){
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
         this.mlistTag.apply {
             clear()
             addAll(mList)
@@ -141,9 +175,22 @@ class FavoriteAdapter(
                 itemTVONE.setTypeface(itemTVONE.typeface, Typeface.ITALIC)
                 itemImg.setBackgroundResource(R.drawable.ic_quotes)
                 itemImgRemove.setClickRemove(itemQuotes.id)
+<<<<<<< HEAD
+<<<<<<< HEAD
+                itemTVONE.setClickItem(itemQuotes, null  , null , position)
+                itemTVTWO.setClickItem(itemQuotes, null  , null , null)
+                cardView.setClickItem(itemQuotes, null  , null, null)
+
+=======
                 itemTVONE.setClickItem(itemQuotes, null  , null)
                 itemTVTWO.setClickItem(itemQuotes, null  , null)
                 cardView.setClickItem(itemQuotes, null  , null)
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
+=======
+                itemTVONE.setClickItem(itemQuotes, null  , null)
+                itemTVTWO.setClickItem(itemQuotes, null  , null)
+                cardView.setClickItem(itemQuotes, null  , null)
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
             }
         }
 
@@ -153,8 +200,18 @@ class FavoriteAdapter(
                 itemTVONE.text = itemAuthor.mAuthor
                 itemImg.setBackgroundResource(R.drawable.ic_author)
                 itemImgRemove.setClickRemove(itemAuthor.id)
+<<<<<<< HEAD
+<<<<<<< HEAD
+                itemTVONE.setClickItem(null , itemAuthor , null, null)
+                cardView.setClickItem(null , itemAuthor ,null, null)
+=======
                 itemTVONE.setClickItem(null , itemAuthor , null)
                 cardView.setClickItem(null , itemAuthor ,null)
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
+=======
+                itemTVONE.setClickItem(null , itemAuthor , null)
+                cardView.setClickItem(null , itemAuthor ,null)
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
             }
         }
 
@@ -165,8 +222,18 @@ class FavoriteAdapter(
                 itemTVONE.setTypeface(itemTVONE.typeface, Typeface.BOLD_ITALIC)
                 itemImg.setBackgroundResource(R.drawable.ic_lable)
                 itemImgRemove.setClickRemove(itemTag.id)
+<<<<<<< HEAD
+<<<<<<< HEAD
+                itemTVONE.setClickItem(null , null , itemTag , null)
+                cardView.setClickItem(null , null ,itemTag , null)
+=======
                 itemTVONE.setClickItem(null , null , itemTag)
                 cardView.setClickItem(null , null ,itemTag)
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
+=======
+                itemTVONE.setClickItem(null , null , itemTag)
+                cardView.setClickItem(null , null ,itemTag)
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
             }
         }
     }
