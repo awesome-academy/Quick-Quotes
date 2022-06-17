@@ -1,6 +1,10 @@
 package com.truongdc21.quickquotes.presenter.fragmentFavorite
 
 import android.content.Context
+<<<<<<< HEAD
+import android.util.Log
+=======
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
 import com.truongdc21.quickquotes.R
 import com.truongdc21.quickquotes.data.model.Author
 import com.truongdc21.quickquotes.data.model.Quotes
@@ -31,7 +35,11 @@ class FavoriteFragmentPresenter (
     override fun getListQuotesFavorite() {
         mRepoQuotes.readQuotes(object : OnLocalResultListener<List<Quotes>>{
             override fun onSuccess(data: List<Quotes>) {
+<<<<<<< HEAD
                 mView?.setAdapterQuotes(data)
+=======
+                mView?.showAdapterQuotes(data)
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
                 if (data.isEmpty()) mView?.onError(mContext.resources.getString(R.string.list_isempty))
             }
             override fun onError(exception: Exception?) {
@@ -43,7 +51,11 @@ class FavoriteFragmentPresenter (
     override fun getListAuthorFavorite() {
         mRepoAuthor.readAuthor(object : OnLocalResultListener<List<Author>>{
             override fun onSuccess(data: List<Author>) {
+<<<<<<< HEAD
                 mView?.setAdapterAuthor(data)
+=======
+                mView?.showAdapterAuthor(data)
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
                 if (data.isEmpty()) mView?.onError(mContext.resources.getString(R.string.list_isempty))
             }
 
@@ -56,7 +68,11 @@ class FavoriteFragmentPresenter (
     override fun getListTagFavorite() {
        mRepoTag.readTag(object : OnLocalResultListener<List<Tag>>{
            override fun onSuccess(data: List<Tag>) {
+<<<<<<< HEAD
                mView?.setAdapterTag(data)
+=======
+               mView?.showAdapterTag(data)
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
                if (data.isEmpty()) mView?.onError(mContext.resources.getString(R.string.list_isempty))
            }
 

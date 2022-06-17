@@ -1,6 +1,13 @@
 package com.truongdc21.quickquotes.ui.fragment
 
 
+<<<<<<< HEAD
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+
+=======
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.truongdc21.quickquotes.data.model.Author
@@ -20,6 +27,7 @@ import com.truongdc21.quickquotes.utils.showToast
 import com.truongdc21.quickquotes.utils.switchActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+<<<<<<< HEAD
 
 class FavoriteFragment(private val mKey : String):
     BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteBinding::inflate),
@@ -27,6 +35,15 @@ class FavoriteFragment(private val mKey : String):
     FavoriteAdapterContract.iClickItem,
     FavoriteAdapterContract.iClickRemove {
 
+=======
+
+class FavoriteFragment(private val mKey : String):
+    BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteBinding::inflate),
+    FavoriteFragmentContact.View,
+    FavoriteAdapterContract.iClickItem,
+    FavoriteAdapterContract.iClickRemove {
+
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
     private var mPresenter: FavoriteFragmentPresenter? = null
     private val adapterFavorite by lazy { FavoriteAdapter(this , this) }
 
@@ -44,19 +61,31 @@ class FavoriteFragment(private val mKey : String):
         initPresenter()
     }
 
+<<<<<<< HEAD
     override fun setAdapterQuotes(mlIst: List<Quotes>) {
+=======
+    override fun showAdapterQuotes(mlIst: List<Quotes>) {
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
         lifecycleScope.launch(Dispatchers.Main){
             adapterFavorite.setDataQuotes(mlIst , Constant.QUOTES)
         }
     }
 
+<<<<<<< HEAD
     override fun setAdapterAuthor(mList: List<Author>) {
+=======
+    override fun showAdapterAuthor(mList: List<Author>) {
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
         lifecycleScope.launch(Dispatchers.Main){
             adapterFavorite.setDataAuthor(mList, Constant.AUTHOR)
         }
     }
 
+<<<<<<< HEAD
     override fun setAdapterTag(mList: List<Tag>) {
+=======
+    override fun showAdapterTag(mList: List<Tag>) {
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
        lifecycleScope.launch(Dispatchers.Main){
            adapterFavorite.setDataTag(mList, Constant.TAG)
        }
@@ -80,9 +109,20 @@ class FavoriteFragment(private val mKey : String):
        mPresenter?.removeTag(id)
     }
 
+<<<<<<< HEAD
+    override fun clickItemQuotes(mList: List<Quotes> , position : Int) {
+        lifecycleScope.launch(Dispatchers.Main){
+            val intent = Intent(this@FavoriteFragment.context , ViewPlayActivity::class.java)
+            val bundle = Bundle()
+            bundle.putParcelableArrayList(Constant.INTENT_VIEWPLAY_QUOTES , mList as ArrayList)
+            bundle.putInt(Constant.INTENT_VIEWPLAY_POSITION , position )
+            intent.putExtras(bundle)
+            startActivity(intent)
+=======
     override fun clickItemQuotes(quotes: Quotes) {
         lifecycleScope.launch(Dispatchers.Main){
             this@FavoriteFragment.context?.switchActivity(ViewPlayActivity())
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
         }
     }
 
@@ -119,7 +159,10 @@ class FavoriteFragment(private val mKey : String):
             InitRepository.initRepositoryAuthor(this.requireContext()),
             InitRepository.initRepositoryTag(this.requireContext())
         )
+<<<<<<< HEAD
         mPresenter?.onStart()
+=======
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
         mPresenter?.setView(this)
     }
 }

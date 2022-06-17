@@ -51,7 +51,7 @@ class HomeFragmentPresenter(
     override fun readQuotesDB() {
         mRepo.readQuotes(object : OnLocalResultListener<List<Quotes>>{
             override fun onSuccess(data: List<Quotes>) {
-                mView?.setAdapterListLocal(data)
+                mView?.showAdapterListLocal(data)
             }
             override fun onError(exception: java.lang.Exception?) {
 

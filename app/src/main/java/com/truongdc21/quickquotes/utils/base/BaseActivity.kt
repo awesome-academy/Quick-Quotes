@@ -18,5 +18,6 @@ abstract class BaseActivity <VB : ViewBinding> :
     }
 
     abstract fun initViews()
+
     abstract fun initData()
 }
