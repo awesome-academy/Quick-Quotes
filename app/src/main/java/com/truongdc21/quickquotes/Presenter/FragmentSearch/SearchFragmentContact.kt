@@ -19,9 +19,15 @@ interface SearchFragmentContact {
 
     interface View {
 
+<<<<<<< HEAD
         fun setAdapterListAPI(mListSearch : List<Search>)
 
         fun setAdapterListHistory(mListSearch: List<Search>)
+=======
+        fun showAdapterListAPI(mListSearch : List<Search>)
+
+        fun showAdapterListHistory(mListSearch: List<Search>)
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
 
         fun removeHistorySuccess()
 

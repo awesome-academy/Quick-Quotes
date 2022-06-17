@@ -17,7 +17,11 @@ interface FavoriteAdapterContract {
 
     interface iClickItem {
 
+<<<<<<< HEAD
+        fun clickItemQuotes(mList: List<Quotes>, position : Int)
+=======
         fun clickItemQuotes(quotes: Quotes)
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
 
         fun clickItemAuthor(author: Author)
 

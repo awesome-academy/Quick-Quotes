@@ -9,4 +9,9 @@ object Constant {
     const val TAB_QUOTES = 0
     const val TAB_AUTHOR = 1
     const val TAB_TAG = 2
+<<<<<<< HEAD
+    const val INTENT_VIEWPLAY_QUOTES = "viewplay"
+    const val INTENT_VIEWPLAY_POSITION = "position"
+=======
+>>>>>>> f8640f9... Create UI favorite, Handle event, Fetch data
 }
