@@ -85,7 +85,7 @@ class SearchFragment:
         return true
     }
 
-    override fun setAdapterListAPI(mListSearch: List<Search>) {
+    override fun showAdapterListAPI(mListSearch: List<Search>) {
         lifecycleScope.launch(Dispatchers.Main){
             adapterSearch.setDataAPI(mListSearch)
         }
@@ -94,7 +94,7 @@ class SearchFragment:
     override fun onError() {
     }
 
-    override fun setAdapterListHistory(mListSearch: List<Search>) {
+    override fun showAdapterListHistory(mListSearch: List<Search>) {
         lifecycleScope.launch(Dispatchers.Main){
             adapterSearch.setDataHistory(mListSearch.reversed())
         }

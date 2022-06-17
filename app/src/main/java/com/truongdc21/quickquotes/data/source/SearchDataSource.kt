@@ -9,15 +9,22 @@ import com.truongdc21.quickquotes.data.source.remote.OnRemoteResultListener
 interface SearchDataSource {
 
     interface Local {
-        fun insertSearch (search: Search, listener: OnLocalResultListener<Unit>)
-        fun updateSearch (search: Search, id : Int , listener: OnLocalResultListener<Unit>)
-        fun deleteSearch (id : Int , listener: OnLocalResultListener<Unit>)
-        fun readSearch (listener: OnLocalResultListener<List<Search>>)
+
+        fun insertSearch(search: Search, listener: OnLocalResultListener<Unit>)
+
+        fun updateSearch(search: Search, id : Int , listener: OnLocalResultListener<Unit>)
+
+        fun deleteSearch(id : Int , listener: OnLocalResultListener<Unit>)
+
+        fun readSearch(listener: OnLocalResultListener<List<Search>>)
     }
 
     interface Remote {
-        fun getListQuotes (listener : OnRemoteResultListener<List<Quotes>>)
-        fun getListAuthor (listener : OnRemoteResultListener<List<String>>)
-        fun getListTag (listener : OnRemoteResultListener<List<String>>)
+
+        fun getListQuotes(listener : OnRemoteResultListener<List<Quotes>>)
+
+        fun getListAuthor(listener : OnRemoteResultListener<List<String>>)
+
+        fun getListTag(listener : OnRemoteResultListener<List<String>>)
     }
 }

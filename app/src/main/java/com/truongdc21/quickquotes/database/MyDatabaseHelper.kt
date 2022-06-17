@@ -8,7 +8,7 @@ class MyDatabaseHelper(
     context: Context,
     dbName : String,
     dbVersion : Int,
-): SQLiteOpenHelper(context , dbName , null , dbVersion ) {
+    ): SQLiteOpenHelper(context , dbName , null , dbVersion ) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(ConstanceDb.QUERY_CREATE_QUOTES)
@@ -30,6 +30,5 @@ class MyDatabaseHelper(
         fun getInstance (context: Context) = synchronized(this){
             instance?:MyDatabaseHelper(context , ConstanceDb.DATABASE_NAME , ConstanceDb.DATABASE_VERSION).also { instance = it }
         }
-
     }
 }

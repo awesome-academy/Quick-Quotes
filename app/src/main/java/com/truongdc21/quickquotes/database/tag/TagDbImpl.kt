@@ -5,7 +5,7 @@ import com.truongdc21.quickquotes.database.ConstanceDb
 import com.truongdc21.quickquotes.database.MyDatabaseHelper
 import com.truongdc21.quickquotes.data.model.Tag
 
-class TagDbImpl(database: MyDatabaseHelper) : TagDaoDb {
+class TagDbImpl(database: MyDatabaseHelper): TagDaoDb {
     private val dbWrite = database.writableDatabase
     private val dbRead = database.readableDatabase
 
@@ -34,12 +34,12 @@ class TagDbImpl(database: MyDatabaseHelper) : TagDaoDb {
         cursor?.let {
             if (it.count != 0) {
                 while (it.moveToNext()) {
-                    val tag = Tag(it.getString(0), it.getString(1))
+                    val tag = Tag(it.getInt(0), it.getString(1))
                     mListTag.add(tag)
                 }
             }
         }
-        return mListTag
+        return mListTag.reversed()
     }
 
     companion object {

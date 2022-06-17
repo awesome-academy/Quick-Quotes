@@ -2,12 +2,13 @@ package com.truongdc21.quickquotes.data.repository
 
 import com.truongdc21.quickquotes.data.model.Author
 import com.truongdc21.quickquotes.data.source.AuthorDataSource
+import com.truongdc21.quickquotes.data.source.QuotesDataSource
 import com.truongdc21.quickquotes.data.source.local.OnLocalResultListener
 import com.truongdc21.quickquotes.data.source.remote.OnRemoteResultListener
 
 class AuthorRepository(
-    private val local : AuthorDataSource.Local,
-    private val remote : AuthorDataSource.Remote
+    private val remote : AuthorDataSource.Remote,
+    private val local : AuthorDataSource.Local
  ) : AuthorDataSource.Local , AuthorDataSource.Remote{
 
     override fun insertAuthor(author: String, listener: OnLocalResultListener<Unit>) {
@@ -22,7 +23,7 @@ class AuthorRepository(
         local.deleteAuthor(id , listener)
     }
 
-    override fun readAuthor(listener: OnLocalResultListener<MutableList<Author>>) {
+    override fun readAuthor(listener: OnLocalResultListener<List<Author>>) {
         local.readAuthor(listener)
     }
 
@@ -32,11 +33,9 @@ class AuthorRepository(
 
     companion object {
         private var instance: AuthorRepository? = null
-
-        fun getInstance(local: AuthorDataSource.Local, remote: AuthorDataSource.Remote){
-            synchronized(this){
-                instance ?: AuthorRepository(local , remote).also { instance = it }
-            }
-        }
+        fun getInstace(
+            remote: AuthorDataSource.Remote,
+            local: AuthorDataSource.Local) = AuthorRepository.instance
+            ?: AuthorRepository(remote, local).also { AuthorRepository.instance = it }
     }
 }
