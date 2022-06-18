@@ -31,7 +31,7 @@ class FavoriteFragmentPresenter (
     override fun getListQuotesFavorite() {
         mRepoQuotes.readQuotes(object : OnLocalResultListener<List<Quotes>>{
             override fun onSuccess(data: List<Quotes>) {
-                mView?.setAdapterQuotes(data)
+                mView?.showAdapterQuotes(data)
                 if (data.isEmpty()) mView?.onError(mContext.resources.getString(R.string.list_isempty))
             }
             override fun onError(exception: Exception?) {
@@ -43,7 +43,7 @@ class FavoriteFragmentPresenter (
     override fun getListAuthorFavorite() {
         mRepoAuthor.readAuthor(object : OnLocalResultListener<List<Author>>{
             override fun onSuccess(data: List<Author>) {
-                mView?.setAdapterAuthor(data)
+                mView?.showAdapterAuthor(data)
                 if (data.isEmpty()) mView?.onError(mContext.resources.getString(R.string.list_isempty))
             }
 
@@ -56,7 +56,7 @@ class FavoriteFragmentPresenter (
     override fun getListTagFavorite() {
        mRepoTag.readTag(object : OnLocalResultListener<List<Tag>>{
            override fun onSuccess(data: List<Tag>) {
-               mView?.setAdapterTag(data)
+               mView?.showAdapterTag(data)
                if (data.isEmpty()) mView?.onError(mContext.resources.getString(R.string.list_isempty))
            }
 

@@ -12,4 +12,3 @@ fun FragmentActivity.replaceFragmentBottomNAV(fragment : Fragment){
         commit()
     }
 }
-

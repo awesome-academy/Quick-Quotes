@@ -26,11 +26,11 @@ interface FavoriteFragmentContact {
 
     interface View {
 
-        fun setAdapterQuotes(mlIst: List<Quotes>)
+        fun showAdapterQuotes(mlIst: List<Quotes>)
 
-        fun setAdapterAuthor(mList: List<Author>)
+        fun showAdapterAuthor(mList: List<Author>)
 
-        fun setAdapterTag(mList : List<Tag>)
+        fun showAdapterTag(mList : List<Tag>)
 
         fun removeSuccess (message: String)
 

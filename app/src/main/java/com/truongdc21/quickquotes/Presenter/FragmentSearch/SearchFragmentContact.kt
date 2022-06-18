@@ -19,9 +19,9 @@ interface SearchFragmentContact {
 
     interface View {
 
-        fun setAdapterListAPI(mListSearch : List<Search>)
+        fun showAdapterListAPI(mListSearch : List<Search>)
 
-        fun setAdapterListHistory(mListSearch: List<Search>)
+        fun showAdapterListHistory(mListSearch: List<Search>)
 
         fun removeHistorySuccess()
 

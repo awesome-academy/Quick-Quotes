@@ -1,6 +1,8 @@
 package com.truongdc21.quickquotes.ui.fragment
 
 
+import android.content.Intent
+import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.truongdc21.quickquotes.data.model.Author
@@ -44,19 +46,21 @@ class FavoriteFragment(private val mKey : String):
         initPresenter()
     }
 
-    override fun setAdapterQuotes(mlIst: List<Quotes>) {
+    override fun showAdapterQuotes(mlIst: List<Quotes>) {
         lifecycleScope.launch(Dispatchers.Main){
             adapterFavorite.setDataQuotes(mlIst , Constant.QUOTES)
         }
     }
 
-    override fun setAdapterAuthor(mList: List<Author>) {
+
+    override fun showAdapterAuthor(mList: List<Author>) {
         lifecycleScope.launch(Dispatchers.Main){
             adapterFavorite.setDataAuthor(mList, Constant.AUTHOR)
         }
     }
 
-    override fun setAdapterTag(mList: List<Tag>) {
+
+    override fun showAdapterTag(mList: List<Tag>) {
        lifecycleScope.launch(Dispatchers.Main){
            adapterFavorite.setDataTag(mList, Constant.TAG)
        }
@@ -80,9 +84,14 @@ class FavoriteFragment(private val mKey : String):
        mPresenter?.removeTag(id)
     }
 
-    override fun clickItemQuotes(quotes: Quotes) {
+    override fun clickItemQuotes(mList: List<Quotes> , position : Int) {
         lifecycleScope.launch(Dispatchers.Main){
-            this@FavoriteFragment.context?.switchActivity(ViewPlayActivity())
+            val intent = Intent(this@FavoriteFragment.context , ViewPlayActivity::class.java)
+            val bundle = Bundle()
+            bundle.putParcelableArrayList(Constant.INTENT_VIEWPLAY_QUOTES , mList as ArrayList)
+            bundle.putInt(Constant.INTENT_VIEWPLAY_POSITION , position )
+            intent.putExtras(bundle)
+            startActivity(intent)
         }
     }
 
@@ -119,7 +128,6 @@ class FavoriteFragment(private val mKey : String):
             InitRepository.initRepositoryAuthor(this.requireContext()),
             InitRepository.initRepositoryTag(this.requireContext())
         )
-        mPresenter?.onStart()
         mPresenter?.setView(this)
     }
 }

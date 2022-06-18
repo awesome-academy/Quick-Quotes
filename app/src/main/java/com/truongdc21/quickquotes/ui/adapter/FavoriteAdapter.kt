@@ -1,5 +1,6 @@
 package com.truongdc21.quickquotes.ui.adapter
 
+
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
@@ -74,13 +75,15 @@ class FavoriteAdapter(
         }
     }
 
-    private fun View.setClickItem(quotes: Quotes? , author: Author? , tag: Tag?){
+    private fun View.setClickItem(quotes: Quotes? , author: Author? , tag: Tag? , position: Int?){
         when (mKey){
             Constant.QUOTES -> {
                 this.setOnClickListener {
-                  quotes?.let {
-                      clickItem.clickItemQuotes(it)
-                  }
+                    quotes?.let {
+                        position?.let {
+                            clickItem.clickItemQuotes(mlistQuotes, it )
+                        }
+                    }
                 }
             }
 
@@ -102,7 +105,7 @@ class FavoriteAdapter(
         }
     }
 
-    fun setDataQuotes(mList : List<Quotes> , key : String){
+    fun setDataQuotes(mList : List<Quotes>, key : String){
         this.mlistQuotes.apply {
             clear()
             addAll(mList)
@@ -120,7 +123,8 @@ class FavoriteAdapter(
         notifyDataSetChanged()
     }
 
-    fun setDataTag(mList : List<Tag> , key: String){
+
+    fun setDataTag(mList : List<Tag>, key: String){
         this.mlistTag.apply {
             clear()
             addAll(mList)
@@ -141,9 +145,9 @@ class FavoriteAdapter(
                 itemTVONE.setTypeface(itemTVONE.typeface, Typeface.ITALIC)
                 itemImg.setBackgroundResource(R.drawable.ic_quotes)
                 itemImgRemove.setClickRemove(itemQuotes.id)
-                itemTVONE.setClickItem(itemQuotes, null  , null)
-                itemTVTWO.setClickItem(itemQuotes, null  , null)
-                cardView.setClickItem(itemQuotes, null  , null)
+                itemTVONE.setClickItem(itemQuotes, null  , null , position)
+                itemTVTWO.setClickItem(itemQuotes, null  , null , null)
+                cardView.setClickItem(itemQuotes, null  , null, null)
             }
         }
 
@@ -153,8 +157,8 @@ class FavoriteAdapter(
                 itemTVONE.text = itemAuthor.mAuthor
                 itemImg.setBackgroundResource(R.drawable.ic_author)
                 itemImgRemove.setClickRemove(itemAuthor.id)
-                itemTVONE.setClickItem(null , itemAuthor , null)
-                cardView.setClickItem(null , itemAuthor ,null)
+                itemTVONE.setClickItem(null , itemAuthor , null, null)
+                cardView.setClickItem(null , itemAuthor ,null, null)
             }
         }
 
@@ -165,8 +169,9 @@ class FavoriteAdapter(
                 itemTVONE.setTypeface(itemTVONE.typeface, Typeface.BOLD_ITALIC)
                 itemImg.setBackgroundResource(R.drawable.ic_lable)
                 itemImgRemove.setClickRemove(itemTag.id)
-                itemTVONE.setClickItem(null , null , itemTag)
-                cardView.setClickItem(null , null ,itemTag)
+                itemTVONE.setClickItem(null , null , itemTag , null)
+                cardView.setClickItem(null , null ,itemTag , null)
+
             }
         }
     }
