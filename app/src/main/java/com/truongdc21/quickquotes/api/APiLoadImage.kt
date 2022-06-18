@@ -1,9 +1,7 @@
 package com.truongdc21.quickquotes.api
 
 import android.net.Uri
-import android.util.Log
 import org.json.JSONArray
-import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 

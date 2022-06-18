@@ -1,6 +1,5 @@
 package com.truongdc21.quickquotes.presenter.fragmentSearch
 
-import android.view.View
 import com.truongdc21.quickquotes.data.model.Search
 import com.truongdc21.quickquotes.utils.base.BasePresenter
 

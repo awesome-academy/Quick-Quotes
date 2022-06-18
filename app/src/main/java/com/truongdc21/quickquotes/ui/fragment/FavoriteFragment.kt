@@ -1,6 +1,7 @@
 package com.truongdc21.quickquotes.ui.fragment
 
-
+import android.content.Intent
+import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.truongdc21.quickquotes.data.model.Author
@@ -80,9 +81,14 @@ class FavoriteFragment(private val mKey : String):
        mPresenter?.removeTag(id)
     }
 
-    override fun clickItemQuotes(quotes: Quotes) {
+    override fun clickItemQuotes(mList: List<Quotes> , position : Int) {
         lifecycleScope.launch(Dispatchers.Main){
-            this@FavoriteFragment.context?.switchActivity(ViewPlayActivity())
+            val intent = Intent(this@FavoriteFragment.context , ViewPlayActivity::class.java)
+            val bundle = Bundle()
+            bundle.putParcelableArrayList(Constant.INTENT_VIEWPLAY_QUOTES , mList as ArrayList)
+            bundle.putInt(Constant.INTENT_VIEWPLAY_POSITION , position )
+            intent.putExtras(bundle)
+            startActivity(intent)
         }
     }
 

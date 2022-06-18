@@ -1,6 +1,5 @@
 package com.truongdc21.quickquotes.presenter.fragmentFavorite
 
-import android.view.View
 import com.truongdc21.quickquotes.data.model.Author
 import com.truongdc21.quickquotes.data.model.Quotes
 import com.truongdc21.quickquotes.data.model.Tag

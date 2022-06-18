@@ -1,12 +1,14 @@
 package com.truongdc21.quickquotes.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.truongdc21.quickquotes.R
+import com.truongdc21.quickquotes.databinding.ActivitySearchBinding
 
-class SearchActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+class SearchActivity : BaseActivity<ActivitySearchBinding>(ActivitySearchBinding::inflate) {
+
+    override fun initViews() {
+        // TODO implement later
+    }
+
+    override fun initData() {
+        // TODO implement later
     }
 }

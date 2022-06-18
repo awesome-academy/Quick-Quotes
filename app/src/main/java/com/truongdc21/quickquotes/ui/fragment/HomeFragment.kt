@@ -1,6 +1,8 @@
 package com.truongdc21.quickquotes.ui.fragment
 
 import android.app.ProgressDialog
+import android.content.Intent
+import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.truongdc21.quickquotes.R
@@ -18,6 +20,7 @@ import com.truongdc21.quickquotes.ui.activity.TagActivity
 import com.truongdc21.quickquotes.ui.activity.ViewPlayActivity
 import com.truongdc21.quickquotes.ui.adapter.QuotesAdapter
 import com.truongdc21.quickquotes.ui.adapter.contract.QuotesAdapterConstract
+import com.truongdc21.quickquotes.utils.Constant
 import com.truongdc21.quickquotes.utils.copyToClipboard
 import com.truongdc21.quickquotes.utils.showToast
 import com.truongdc21.quickquotes.utils.switchActivity
@@ -119,7 +122,14 @@ class HomeFragment :
     }
 
     override fun clickItemViewPlay(list: List<Quotes>, position: Int) {
-        this@HomeFragment.context?.switchActivity(ViewPlayActivity())
+        lifecycleScope.launch(Dispatchers.Main){
+            val intent = Intent(this@HomeFragment.context , ViewPlayActivity::class.java)
+            val bundle = Bundle()
+            bundle.putParcelableArrayList(Constant.INTENT_VIEWPLAY_QUOTES , list as ArrayList)
+            bundle.putInt(Constant.INTENT_VIEWPLAY_POSITION , position)
+            intent.putExtras(bundle)
+            startActivity(intent)
+        }
     }
 
     override fun clickItemCopy(srtQuotes: String) {

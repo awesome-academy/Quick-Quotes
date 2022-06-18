@@ -13,6 +13,7 @@ object ConstanceDb {
     const val COLUMN_QUOTES = "quotes"
     const val COLUMN_AUTHOR = "author"
     const val COLUMN_TAG = "tag"
+    const val COLUMN_URL_IMAGE = "urlImage"
     const val COLUMN_HISTORY = "history"
     const val COLUMN_KEY = "key"
     const val COLUMN_TEXT = "text"
@@ -24,7 +25,8 @@ object ConstanceDb {
             " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
             COLUMN_QUOTES + " TEXT, " +
             COLUMN_AUTHOR + " TEXT, " +
-            COLUMN_TAG + " TEXT );"
+            COLUMN_TAG + " TEXT, " +
+            COLUMN_URL_IMAGE + " TEXT );"
 
     val QUERY_CREATE_AUTHOR =  "CREATE TABLE " + TABLE_NAME_AUTHOR +
             " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
