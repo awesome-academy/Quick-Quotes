@@ -1,12 +1,10 @@
 package com.truongdc21.quickquotes.ui.fragment
 
-import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.truongdc21.quickquotes.R
-import com.truongdc21.quickquotes.data.model.Quotes
 import com.truongdc21.quickquotes.data.model.Search
 import com.truongdc21.quickquotes.data.repository.SearchRepository
 import com.truongdc21.quickquotes.data.source.local.SearchLocalSource

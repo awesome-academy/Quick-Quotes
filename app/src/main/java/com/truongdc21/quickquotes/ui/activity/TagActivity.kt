@@ -1,12 +1,15 @@
 package com.truongdc21.quickquotes.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.truongdc21.quickquotes.R
+import com.truongdc21.quickquotes.databinding.ActivityTagBinding
 
-class TagActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tag)
+class TagActivity:
+    BaseActivity<ActivityTagBinding>(ActivityTagBinding::inflate){
+
+    override fun initViews() {
+        // TODO implement later
+    }
+
+    override fun initData() {
+        // TODO implement later
     }
 }

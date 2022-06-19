@@ -1,6 +1,5 @@
 package com.truongdc21.quickquotes.data.source
 
-import com.truongdc21.quickquotes.data.model.Author
 import com.truongdc21.quickquotes.data.model.Quotes
 import com.truongdc21.quickquotes.data.model.Search
 import com.truongdc21.quickquotes.data.source.local.OnLocalResultListener

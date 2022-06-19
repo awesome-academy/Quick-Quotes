@@ -14,6 +14,7 @@ class QuotesDbImpl(database: MyDatabaseHelper) : QuotesDaoDb {
             put(ConstanceDb.COLUMN_QUOTES, quotes.mQuotes)
             put(ConstanceDb.COLUMN_AUTHOR, quotes.Author)
             put(ConstanceDb.COLUMN_TAG, quotes.Tag)
+            put(ConstanceDb.COLUMN_URL_IMAGE, quotes.urlImage)
         }
         dbWrite.insert(ConstanceDb.TABLE_NAME_QUOTES, null, cv)
     }
@@ -23,6 +24,7 @@ class QuotesDbImpl(database: MyDatabaseHelper) : QuotesDaoDb {
             put(ConstanceDb.COLUMN_QUOTES, quotes.mQuotes)
             put(ConstanceDb.COLUMN_AUTHOR, quotes.Author)
             put(ConstanceDb.COLUMN_TAG, quotes.Tag)
+            put(ConstanceDb.COLUMN_URL_IMAGE, quotes.urlImage)
         }
         dbWrite.update(
             ConstanceDb.TABLE_NAME_QUOTES,
@@ -48,7 +50,7 @@ class QuotesDbImpl(database: MyDatabaseHelper) : QuotesDaoDb {
             if (it.count != 0) {
                 while (it.moveToNext()) {
                     val quotes =
-                        Quotes(it.getInt(0), it.getString(1), it.getString(2), it.getString(3) , "")
+                        Quotes(it.getInt(0), it.getString(1), it.getString(2), it.getString(3) , it.getString(4))
                     mListQuotes.add(quotes)
                 }
             }

@@ -17,7 +17,7 @@ interface FavoriteAdapterContract {
 
     interface iClickItem {
 
-        fun clickItemQuotes(quotes: Quotes)
+        fun clickItemQuotes(mList: List<Quotes>, position : Int)
 
         fun clickItemAuthor(author: Author)
 

@@ -1,12 +1,10 @@
 package com.truongdc21.quickquotes.api
 
 import android.net.Uri
-import android.util.Log
 import com.truongdc21.quickquotes.data.model.Quotes
 import com.truongdc21.quickquotes.data.source.remote.OnRemoteResultListener
 import kotlinx.coroutines.*
 import org.json.JSONObject
-import java.net.HttpURLConnection
 
 object paserJsonAPIToList {
 

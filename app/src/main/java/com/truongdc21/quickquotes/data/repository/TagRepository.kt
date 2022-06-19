@@ -1,7 +1,6 @@
 package com.truongdc21.quickquotes.data.repository
 
 import com.truongdc21.quickquotes.data.model.Tag
-import com.truongdc21.quickquotes.data.source.AuthorDataSource
 import com.truongdc21.quickquotes.data.source.TagDataSource
 import com.truongdc21.quickquotes.data.source.local.OnLocalResultListener
 import com.truongdc21.quickquotes.data.source.remote.OnRemoteResultListener

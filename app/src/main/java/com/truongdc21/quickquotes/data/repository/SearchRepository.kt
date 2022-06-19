@@ -2,9 +2,7 @@ package com.truongdc21.quickquotes.data.repository
 
 import com.truongdc21.quickquotes.data.model.Quotes
 import com.truongdc21.quickquotes.data.model.Search
-import com.truongdc21.quickquotes.data.source.QuotesDataSource
 import com.truongdc21.quickquotes.data.source.SearchDataSource
-import com.truongdc21.quickquotes.data.source.TagDataSource
 import com.truongdc21.quickquotes.data.source.local.OnLocalResultListener
 import com.truongdc21.quickquotes.data.source.remote.OnRemoteResultListener
 
