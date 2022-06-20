@@ -13,6 +13,7 @@
         android:padding="@dimen/dp_10">
 
         <ImageView
+            android:id="@+id/imgItemAuthor"
             android:layout_width="@dimen/dp_25"
             android:layout_height="@dimen/dp_25"
             android:background="@drawable/ic_author" />
@@ -24,10 +25,15 @@
             android:layout_marginStart="@dimen/dp_10"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:maxLength="24"
+            android:maxLines="1"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_18"
             android:textStyle="bold" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_1"
+            android:layout_weight="2" />
 
         <ImageView
             android:id="@+id/itemImgMore"
@@ -46,8 +52,8 @@
             android:layout_height="@dimen/dp_0"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="@id/tvItemQuotes"
-            app:layout_constraintEnd_toEndOf="@id/tvItemQuotes"
-            app:layout_constraintStart_toStartOf="@id/tvItemQuotes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvItemQuotes" />
 
         <View
@@ -60,14 +66,14 @@
             app:layout_constraintTop_toTopOf="@id/itemIMGHomeQuotes" />
 
         <TextView
-            android:background="@color/black_transparent_40"
             android:id="@+id/tvItemQuotes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/black_transparent_40"
             android:fontFamily="@font/abril_fatface"
             android:paddingStart="@dimen/dp_25"
-            android:paddingEnd="@dimen/dp_25"
             android:paddingTop="@dimen/dp_50"
+            android:paddingEnd="@dimen/dp_25"
             android:paddingBottom="@dimen/dp_50"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_22"
@@ -113,7 +119,7 @@
             android:id="@+id/itemTvTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLength="24"
-            android:text="" />
+            android:maxLines="1"
+            />
     </LinearLayout>
 </LinearLayout>

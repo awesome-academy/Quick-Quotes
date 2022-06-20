@@ -1,12 +1,15 @@
 package com.truongdc21.quickquotes.data.source.remote
 
 import com.truongdc21.quickquotes.api.ApiConstance
+import com.truongdc21.quickquotes.api.ApiGetURL
+import com.truongdc21.quickquotes.api.paserJsonAPIToList
 import com.truongdc21.quickquotes.data.source.AuthorDataSource
 
 class AuthorRemoteSource : AuthorDataSource.Remote {
 
-    override fun getListAuthor(listener: OnRemoteResultListener<MutableList<String>>) {
-        ApiConstance.parseJsontoAuthor(listener)
+    override fun getListAuthor(listener: OnRemoteResultListener<List<String>>) {
+        val uri = ApiGetURL.getURLAPI(ApiConstance.URL_AUTHOR)
+        paserJsonAPIToList.paserJsonAPIToListAuthor(uri,listener)
     }
 
     companion object {

@@ -1,11 +1,13 @@
 package com.truongdc21.quickquotes.ui.activity
 
-import android.util.Log
+import android.app.ProgressDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.truongdc21.quickquotes.R
 import com.truongdc21.quickquotes.data.model.Quotes
 import com.truongdc21.quickquotes.databinding.ActivityViewPlayBinding
+import com.truongdc21.quickquotes.databinding.LayoutBottomSheetDialogViewplayBinding
 import com.truongdc21.quickquotes.presenter.activityViewPlay.ViewPlayActivityContract
 import com.truongdc21.quickquotes.presenter.activityViewPlay.ViewPlayActivityPresenter
 import com.truongdc21.quickquotes.ui.adapter.ViewPlayAdapter
@@ -19,6 +21,7 @@ class ViewPlayActivity:
 
     private var mPresenter: ViewPlayActivityPresenter? = null
     private val adapterViewPlay by lazy { ViewPlayAdapter(this) }
+    private var mProgressDialog : ProgressDialog? = null
 
     override fun initViews() {
         binding.apply {
@@ -27,6 +30,7 @@ class ViewPlayActivity:
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     mPresenter?.getPositionItemQuotes(position)
+
                 }
             })
         }
@@ -35,7 +39,9 @@ class ViewPlayActivity:
     override fun initData() {
         mPresenter = ViewPlayActivityPresenter(
             this ,
-            InitRepository.initRepositoryQuotes(this)
+            InitRepository.initRepositoryQuotes(this),
+            InitRepository.initRepositoryAuthor(this),
+            InitRepository.initRepositoryTag(this)
         )
         mPresenter?.onStart()
         mPresenter?.setView(this)
@@ -68,6 +74,10 @@ class ViewPlayActivity:
         }
     }
 
+    override fun showItemFromApiReload(position: Int) {
+        binding.vpgViewPlay.currentItem = position
+    }
+
     override fun checkFavorite(boolean: Boolean) {
         lifecycleScope.launch(Dispatchers.Main){
             if (boolean){
@@ -76,6 +86,37 @@ class ViewPlayActivity:
                 binding.imgFavorite.setBackgroundResource(R.drawable.ic_favorite)
             }
         }
+    }
+
+    override fun translateQuotes(boolean: Boolean, srtQuotes: String) {
+        if (boolean){
+            binding.tvQuotes.translateToVietnam(srtQuotes)
+            binding.imgTranslate.setBackgroundResource(R.drawable.ic_translate2)
+        }else {
+            binding.tvQuotes.translateToEnglish(srtQuotes)
+            binding.imgTranslate.setBackgroundResource(R.drawable.ic_translate)
+        }
+    }
+
+    override fun showAdapterLaterRemove(mList: List<Quotes>) {
+        lifecycleScope.launch(Dispatchers.Main){
+            adapterViewPlay.setData(mList)
+        }
+    }
+
+    override fun loadingPropressbar() {
+        mProgressDialog = ProgressDialog(this)
+        mProgressDialog?.let {
+            it.setCancelable(false)
+            it.show()
+            it.setContentView(R.layout.layout_custom_propressdialog)
+            it.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        }
+    }
+
+    override fun loadingSuccess() {
+        mProgressDialog?.dismiss()
     }
 
     override fun onSuccess(message: String) {
@@ -114,10 +155,18 @@ class ViewPlayActivity:
 
             imgMore.setOnClickListener {
                 it.setAnimationClick()
+
+                showBottomSheetDialog(mList, position)
+                mPresenter?.getDataAuthor()
+                mPresenter?.getDataTag()
             }
 
             imgShared.setOnClickListener {
                 it.setAnimationClick()
+                this@ViewPlayActivity.sharedText(
+                    resources.getString(R.string.share_quotes),
+                    mList[position].mQuotes
+                )
             }
 
             imgCopy.setOnClickListener {
@@ -127,11 +176,73 @@ class ViewPlayActivity:
 
             imgTranslate.setOnClickListener {
                 it.setAnimationClick()
+                mPresenter?.translateQuotes(position)
             }
 
             imgFavorite.setOnClickListener {
                 it.setAnimationClick()
                 mPresenter?.clickItemFavorite(mList , position)
+            }
+        }
+    }
+
+    private fun showBottomSheetDialog (mList: List<Quotes>, position: Int){
+        val viewDialog = LayoutBottomSheetDialogViewplayBinding.inflate(layoutInflater)
+        val bottomSheetDialog = BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme)
+        bottomSheetDialog.apply {
+            setContentView(viewDialog.root)
+            show()
+        }
+        val isCheckAuthor = mPresenter?.checkItemFavoriteAuthotBottomSheet(mList[position].Author)
+        val isCheckTag = mPresenter?.checkItemFavoriteTagBottomSheet(mList[position].Tag)
+
+        lifecycleScope.launch(Dispatchers.Main){
+            isCheckAuthor?.let {
+                if(it){
+                    viewDialog.imgItemViewPlayFavoriteAuthor.setBackgroundResource(R.drawable.ic_favorite)
+                }else{
+                    viewDialog.imgItemViewPlayFavoriteAuthor.setBackgroundResource(R.drawable.ic_favorite2)
+                }
+            }
+        }
+
+        lifecycleScope.launch(Dispatchers.Main){
+            isCheckTag?.let {
+                if(it){
+                    viewDialog.imgItemViewPlayFavoriteTag.setBackgroundResource(R.drawable.ic_favorite)
+                }else{
+                    viewDialog.imgItemViewPlayFavoriteTag.setBackgroundResource(R.drawable.ic_favorite2)
+                }
+            }
+        }
+
+        viewDialog.apply {
+            imgHideBottomSheetViewPlay.setOnClickListener {
+                it.setAnimationClick()
+                bottomSheetDialog.dismiss()
+            }
+            viewRemoveViewPlay.setOnClickListener {
+                it.setAnimationClick()
+                mPresenter?.removeItemQuotes(position)
+                bottomSheetDialog.dismiss()
+            }
+
+            viewReloadViewPlay.setOnClickListener {
+                it.setAnimationClick()
+                mPresenter?.getListQuotesApiReload()
+                bottomSheetDialog.dismiss()
+            }
+
+            viewSaveAuthorViewPlay.setOnClickListener {
+                it.setAnimationClick()
+                mPresenter?.checkFavoriteAuthor(mList[position].Author)
+                bottomSheetDialog.dismiss()
+            }
+
+            viewSaveTagViewPlay.setOnClickListener {
+                it.setAnimationClick()
+                mPresenter?.checkFavoriteTag(mList[position].Tag)
+                bottomSheetDialog.dismiss()
             }
         }
     }
