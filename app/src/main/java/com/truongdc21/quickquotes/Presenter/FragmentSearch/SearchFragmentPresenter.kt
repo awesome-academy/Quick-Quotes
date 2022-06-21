@@ -1,5 +1,7 @@
 package com.truongdc21.quickquotes.presenter.fragmentSearch
 
+import android.content.Context
+import com.truongdc21.quickquotes.R
 import com.truongdc21.quickquotes.data.model.Quotes
 import com.truongdc21.quickquotes.data.model.Search
 import com.truongdc21.quickquotes.data.repository.SearchRepository
@@ -7,15 +9,18 @@ import com.truongdc21.quickquotes.data.source.local.OnLocalResultListener
 import com.truongdc21.quickquotes.data.source.remote.OnRemoteResultListener
 import com.truongdc21.quickquotes.database.ConstanceDb
 import com.truongdc21.quickquotes.utils.Constant
+import com.truongdc21.quickquotes.utils.isNetworkAvailable
 import kotlinx.coroutines.*
 import java.lang.Exception
 
 class SearchFragmentPresenter(
+    private val mContext: Context,
     private val mRepo : SearchRepository
     ) : SearchFragmentContact.Presenter{
 
     private var mView : SearchFragmentContact.View? = null
     private var mlistSearch = mutableListOf<Search>()
+    private var mlistQuotes = mutableListOf<Quotes>()
     private var isQuotes : Boolean = false
     private var isAuthor : Boolean = false
     private var isTag : Boolean = false
@@ -34,6 +39,10 @@ class SearchFragmentPresenter(
     }
 
     override fun getListSearchAPI() {
+        if (!mContext.isNetworkAvailable()){
+            mView?.showToast(mContext.resources.getString(R.string.internet_disconnect))
+            return
+        }
         if (isQuotes || isAuthor || isTag) {
             mView?.showAdapterListAPI(mlistSearch)
         } else {
@@ -45,6 +54,10 @@ class SearchFragmentPresenter(
                                 mlistSearch.add(Search(0 , ConstanceDb.COLUMN_QUOTES , i.mQuotes , Constant.REMOTE))
                             }
                             mView?.showAdapterListAPI(mlistSearch)
+                            mlistQuotes.apply {
+                                clear()
+                                addAll(data)
+                            }
                             isQuotes = true
                         }
                         override fun onError(exception: Exception?) { mView?.onError() }
@@ -78,7 +91,6 @@ class SearchFragmentPresenter(
                 }
             }
         }
-
     }
 
     override fun getListSearchHistory() {
@@ -119,6 +131,31 @@ class SearchFragmentPresenter(
                 mView?.removeHistorySuccess()
             }
             override fun onError(exception: Exception?) {}
+        })
+    }
+
+    override fun clickQuotesSearch(text: String) {
+        if (!mContext.isNetworkAvailable()){
+            mView?.showToast(mContext.resources.getString(R.string.internet_disconnect))
+            return
+        }
+        mView?.loadingApi()
+        mRepo.getListQuotes(object : OnRemoteResultListener<List<Quotes>>{
+            var mlistQuotesOneItem = mutableListOf<Quotes>()
+            override fun onSuccess(data: List<Quotes>) {
+                for (i in data) {
+                    if (text == i.mQuotes) {
+                        mlistQuotesOneItem.add(i)
+                        mView?.switchActivityViewPlay(mlistQuotesOneItem)
+                        mView?.loadingApiSuccess()
+                        return
+                    }
+                }
+            }
+
+            override fun onError(exception: Exception?) {
+                mView?.loadingApiSuccess()
+            }
         })
     }
 }

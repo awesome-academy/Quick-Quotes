@@ -18,6 +18,11 @@ interface QuotesDataSource {
     }
 
     interface Remote {
+
         fun getApiQuotesList(listener : OnRemoteResultListener<List<Quotes>>)
+
+        fun getApiQuotesWithAuthor(key : String, listener : OnRemoteResultListener<List<Quotes>>)
+
+        fun getApiQuotesWithTag(key : String, listener : OnRemoteResultListener<List<Quotes>>)
     }
 }
