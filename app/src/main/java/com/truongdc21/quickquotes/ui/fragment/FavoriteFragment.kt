@@ -10,23 +10,23 @@ import com.truongdc21.quickquotes.data.model.Tag
 import com.truongdc21.quickquotes.databinding.FragmentFavoriteBinding
 import com.truongdc21.quickquotes.presenter.fragmentFavorite.FavoriteFragmentContact
 import com.truongdc21.quickquotes.presenter.fragmentFavorite.FavoriteFragmentPresenter
-import com.truongdc21.quickquotes.ui.activity.AuthorActivity
-import com.truongdc21.quickquotes.ui.activity.TagActivity
 import com.truongdc21.quickquotes.ui.activity.ViewPlayActivity
 import com.truongdc21.quickquotes.ui.adapter.FavoriteAdapter
 import com.truongdc21.quickquotes.ui.adapter.contract.FavoriteAdapterContract
-import com.truongdc21.quickquotes.utils.Constant
-import com.truongdc21.quickquotes.utils.InitRepository
-import com.truongdc21.quickquotes.utils.showToast
-import com.truongdc21.quickquotes.utils.switchActivity
+import com.truongdc21.quickquotes.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class FavoriteFragment(private val mKey : String):
+
+class FavoriteFragment(
+    private val mKey : String
+
+    ):
     BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteBinding::inflate),
     FavoriteFragmentContact.View,
     FavoriteAdapterContract.iClickItem,
     FavoriteAdapterContract.iClickRemove {
+
 
     private var mPresenter: FavoriteFragmentPresenter? = null
     private val adapterFavorite by lazy { FavoriteAdapter(this , this) }
@@ -94,13 +94,13 @@ class FavoriteFragment(private val mKey : String):
 
     override fun clickItemAuthor(author: Author) {
         lifecycleScope.launch(Dispatchers.Main){
-            this@FavoriteFragment.context?.switchActivity(AuthorActivity())
+            this@FavoriteFragment.context?.switchAuthorActivity(author.mAuthor)
         }
     }
 
     override fun clickItemTag(tag: Tag) {
         lifecycleScope.launch(Dispatchers.Main){
-            this@FavoriteFragment.context?.switchActivity(TagActivity())
+            this@FavoriteFragment.context?.switchTagActivity(tag.mTag)
         }
     }
 

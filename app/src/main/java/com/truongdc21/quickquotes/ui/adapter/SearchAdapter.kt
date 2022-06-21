@@ -106,6 +106,7 @@ class SearchAdapter(
             addAll(mListHistory)
         }
         notifyDataSetChanged()
+
     }
 
     fun setDataAPI(mListAPI : List<Search>){

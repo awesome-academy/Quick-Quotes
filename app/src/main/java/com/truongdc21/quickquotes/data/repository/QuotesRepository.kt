@@ -30,6 +30,14 @@ class QuotesRepository(
         remote.getApiQuotesList(listener)
     }
 
+    override fun getApiQuotesWithAuthor(key : String, listener: OnRemoteResultListener<List<Quotes>>) {
+        remote.getApiQuotesWithAuthor(key ,listener)
+    }
+
+    override fun getApiQuotesWithTag(key : String, listener: OnRemoteResultListener<List<Quotes>>) {
+        remote.getApiQuotesWithTag(key ,listener)
+    }
+
     companion object {
         private var instance: QuotesRepository? = null
 

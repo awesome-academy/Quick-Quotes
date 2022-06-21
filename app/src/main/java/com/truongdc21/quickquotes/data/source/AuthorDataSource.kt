@@ -18,6 +18,6 @@ interface AuthorDataSource {
     }
 
     interface Remote {
-        fun getListAuthor(listener : OnRemoteResultListener<MutableList<String>>)
+        fun getListAuthor(listener : OnRemoteResultListener<List<String>>)
     }
 }

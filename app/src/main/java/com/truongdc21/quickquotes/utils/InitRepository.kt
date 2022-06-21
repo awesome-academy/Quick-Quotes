@@ -5,16 +5,20 @@ import com.truongdc21.quickquotes.data.model.Author
 import com.truongdc21.quickquotes.data.model.Tag
 import com.truongdc21.quickquotes.data.repository.AuthorRepository
 import com.truongdc21.quickquotes.data.repository.QuotesRepository
+import com.truongdc21.quickquotes.data.repository.SearchRepository
 import com.truongdc21.quickquotes.data.repository.TagRepository
 import com.truongdc21.quickquotes.data.source.local.AuthorLocalSource
 import com.truongdc21.quickquotes.data.source.local.QuotesLocalSource
+import com.truongdc21.quickquotes.data.source.local.SearchLocalSource
 import com.truongdc21.quickquotes.data.source.local.TagLocalSource
 import com.truongdc21.quickquotes.data.source.remote.AuthorRemoteSource
 import com.truongdc21.quickquotes.data.source.remote.QuotesRemoteSource
+import com.truongdc21.quickquotes.data.source.remote.SearchRemoteSource
 import com.truongdc21.quickquotes.data.source.remote.TagRemoteSource
 import com.truongdc21.quickquotes.database.MyDatabaseHelper
 import com.truongdc21.quickquotes.database.author.AuthorDbImpl
 import com.truongdc21.quickquotes.database.quotes.QuotesDbImpl
+import com.truongdc21.quickquotes.database.search.SearchDBIplm
 import com.truongdc21.quickquotes.database.tag.TagDbImpl
 
 object InitRepository {
@@ -46,6 +50,17 @@ object InitRepository {
             TagRemoteSource.getInstance(),
             TagLocalSource.getInstance(
                 TagDbImpl.getInstance(
+                    MyDatabaseHelper.getInstance(context)
+                )
+            )
+        )
+    }
+
+    fun initRepositorySearch(context: Context) : SearchRepository {
+        return SearchRepository.getInstace(
+            SearchRemoteSource.getInstance(),
+            SearchLocalSource.getInstance(
+                SearchDBIplm.getInstance(
                     MyDatabaseHelper.getInstance(context)
                 )
             )

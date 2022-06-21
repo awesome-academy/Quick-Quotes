@@ -15,8 +15,23 @@
     <string name="get_api_error">Api eror</string>
     <string name="all">All</string>
     <string name="quotes">Quotes</string>
+    <string name="daily_quotes">Daily Quotes</string>
     <string name="author">Author</string>
     <string name="tag">Tag</string>
     <string name="list_isempty">List is Empty</string>
     <string name="cross">--</string>
+    <string name="choose">Choose</string>
+    <string name="remove">Remove</string>
+    <string name="share">To share</string>
+    <string name="reload_quotes">Reload new quotes</string>
+    <string name="loading">Loading ..</string>
+    <string name="share_quotes">Share Quotes</string>
+    <string name="add_author_favorite">Add Author to favorite</string>
+    <string name="add_tag_favorite">Add Tag to favorite</string>
+    <string name="remove_author_from_favorite">Remove Author from favorite</string>
+    <string name="remove_tag_from_favorite">Remove Tag from favorite</string>
+    <string name="translate_to_vietnam">Translate to Vietnames</string>
+    <string name="translate_to_english">Translate to English</string>
+    <string name="internet_connect">Internet Connected</string>
+    <string name="internet_disconnect">Internet Disconnected</string>s
 </resources>

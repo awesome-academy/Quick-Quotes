@@ -1,9 +1,7 @@
 package com.truongdc21.quickquotes.data.source.local
 
-import com.truongdc21.quickquotes.data.model.Author
 import com.truongdc21.quickquotes.data.model.Search
 import com.truongdc21.quickquotes.data.source.SearchDataSource
-import com.truongdc21.quickquotes.database.quotes.QuotesDaoDb
 import com.truongdc21.quickquotes.database.search.SearchDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
