@@ -1,6 +1,7 @@
 package com.truongdc21.quickquotes.api
 
 import android.net.Uri
+
 object ApiGetURL {
 
     const val QUERY_TYPE = "type"
@@ -24,15 +25,15 @@ object ApiGetURL {
         return builtURI
     }
 
-    private fun getURLAuthor(URL: String , keyQuery : String): Uri{
+    fun getURLAuthor(URL: String , keyQuery : String): Uri{
         val builtURI: Uri = Uri.parse(URL).buildUpon()
             .appendQueryParameter(QUERY_TYPE, QUERY_AUTHOR_KEY)
-            .appendQueryParameter(QUERY_VAL , keyQuery)
+            .appendQueryParameter(QUERY_VAL, keyQuery)
             .build()
         return builtURI
     }
 
-    private fun getURLTag(URL: String , keyQuery : String): Uri{
+    fun getURLTag(URL: String , keyQuery : String): Uri{
         val builtURI: Uri = Uri.parse(URL).buildUpon()
             .appendQueryParameter(QUERY_TYPE, QUERY_TAG_KEY)
             .appendQueryParameter(QUERY_VAL, keyQuery)

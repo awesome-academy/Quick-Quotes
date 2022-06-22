@@ -26,7 +26,7 @@ class AuthorRepository(
         local.readAuthor(listener)
     }
 
-    override fun getListAuthor(listener: OnRemoteResultListener<MutableList<String>>) {
+    override fun getListAuthor(listener: OnRemoteResultListener<List<String>>) {
         remote.getListAuthor(listener)
     }
 
