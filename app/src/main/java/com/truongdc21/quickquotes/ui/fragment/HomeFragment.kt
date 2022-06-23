@@ -6,24 +6,20 @@ import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.truongdc21.quickquotes.R
+import com.truongdc21.quickquotes.data.model.Author
 import com.truongdc21.quickquotes.data.model.Quotes
-import com.truongdc21.quickquotes.data.repository.QuotesRepository
-import com.truongdc21.quickquotes.data.source.local.QuotesLocalSource
-import com.truongdc21.quickquotes.data.source.remote.QuotesRemoteSource
-import com.truongdc21.quickquotes.database.MyDatabaseHelper
-import com.truongdc21.quickquotes.database.quotes.QuotesDbImpl
+import com.truongdc21.quickquotes.data.model.Tag
 import com.truongdc21.quickquotes.databinding.FragmentHomeBinding
 import com.truongdc21.quickquotes.presenter.fragmentHome.HomeFragmentContact
 import com.truongdc21.quickquotes.presenter.fragmentHome.HomeFragmentPresenter
 import com.truongdc21.quickquotes.ui.activity.AuthorActivity
-import com.truongdc21.quickquotes.ui.activity.TagActivity
 import com.truongdc21.quickquotes.ui.activity.ViewPlayActivity
 import com.truongdc21.quickquotes.ui.adapter.QuotesAdapter
 import com.truongdc21.quickquotes.ui.adapter.contract.QuotesAdapterConstract
 import com.truongdc21.quickquotes.utils.Constant
 import com.truongdc21.quickquotes.utils.copyToClipboard
 import com.truongdc21.quickquotes.utils.showToast
-import com.truongdc21.quickquotes.utils.switchActivity
+import com.truongdc21.quickquotes.utils.*
 import kotlinx.coroutines.*
 import java.lang.Exception
 
@@ -42,15 +38,11 @@ class HomeFragment :
 
     override fun initData()  {
         mPresenter = HomeFragmentPresenter(
-            QuotesRepository.getInstace(
-                QuotesRemoteSource.getInstance(),
-                QuotesLocalSource.getInstance(
-                    QuotesDbImpl.getInstance(
-                        MyDatabaseHelper.getInstance(this@HomeFragment.requireContext())
-                    )
-                )
+            this@HomeFragment.requireContext(),
+            InitRepository.initRepositoryQuotes(this@HomeFragment.requireContext()),
+            InitRepository.initRepositoryAuthor(this@HomeFragment.requireContext()),
+            InitRepository.initRepositoryTag(this@HomeFragment.requireContext())
             )
-        )
         mPresenter?.setView(this)
         mPresenter?.onStart()
     }
@@ -68,33 +60,19 @@ class HomeFragment :
         }
     }
 
-    override fun onError() {
-    }
-
     override fun loadingWait() {
         mProgressDialog = ProgressDialog(this@HomeFragment.context)
-        mProgressDialog?.show()
+        mProgressDialog?.let {
+            it.setCancelable(false)
+            it.show()
+            it.setContentView(R.layout.layout_custom_propressdialog)
+            it.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        }
     }
 
     override fun loadingDone() {
         mProgressDialog?.dismiss()
-    }
-
-    override fun insertFavoriteSuccesss() {
-        lifecycleScope.launch(Dispatchers.Main){
-            this@HomeFragment.context?.apply {
-                showToast(resources.getString(R.string.addFavoriteSuccesss))
-                mPresenter?.let { it.readQuotesDB() }
-            }
-        }
-    }
-
-    override fun insertFavoriteFail(exception: Exception) {
-        lifecycleScope.launch(Dispatchers.Main){
-            this@HomeFragment.context?.apply {
-                showToast("${resources.getString(R.string.addFavoriteFail)}"+exception)
-            }
-        }
     }
 
     override fun showAdapterListLocal(mListQuotesLocal: List<Quotes>) {
@@ -121,14 +99,28 @@ class HomeFragment :
         }
     }
 
+    override fun setDataAuthor(mList: List<Author>) {
+        lifecycleScope.launch(Dispatchers.IO){
+            adapterQuotes.setListAuthorLocal(mList)
+        }
+    }
+
+    override fun setDataTag(mList: List<Tag>) {
+        lifecycleScope.launch(Dispatchers.IO){
+            adapterQuotes.setListTagLocal(mList)
+        }
+    }
+
+    override fun showToast(message: String) {
+        lifecycleScope.launch(Dispatchers.Main){
+            this@HomeFragment.context?.showToast(message)
+        }
+    }
+
+
     override fun clickItemViewPlay(list: List<Quotes>, position: Int) {
         lifecycleScope.launch(Dispatchers.Main){
-            val intent = Intent(this@HomeFragment.context , ViewPlayActivity::class.java)
-            val bundle = Bundle()
-            bundle.putParcelableArrayList(Constant.INTENT_VIEWPLAY_QUOTES , list as ArrayList)
-            bundle.putInt(Constant.INTENT_VIEWPLAY_POSITION , position)
-            intent.putExtras(bundle)
-            startActivity(intent)
+            this@HomeFragment.context?.switchViewPlayActivity(list , position)
         }
     }
 
@@ -144,14 +136,18 @@ class HomeFragment :
     }
 
     override fun clickItemAuthor(srtAuthor: String) {
-        this@HomeFragment.context?.switchActivity(AuthorActivity())
+        val intent = Intent(this@HomeFragment.context , AuthorActivity::class.java)
+        intent.putExtra(Constant.INTEN_AUTHOR, srtAuthor)
+        startActivity(intent)
     }
 
     override fun clickItemTag(srtTag: String) {
-        this@HomeFragment.context?.switchActivity(TagActivity())
+        this@HomeFragment.context?.switchTagActivity(srtTag)
     }
 
     override fun clickItemMore() {
+        mPresenter?.getListAuthor()
+        mPresenter?.getListTag()
     }
 
     override fun clickRemoveFavorite(quotes: Quotes , mListQuotesLocal: List<Quotes>) {
@@ -163,6 +159,14 @@ class HomeFragment :
             }
             mPresenter?.readQuotesDB()
         }
+    }
+
+    override fun clickItemFavoriteAuthor(srtAuthor: String) {
+        mPresenter?.checkFavoriteAuthor(srtAuthor)
+    }
+
+    override fun clickItemFavoriteTag(srtTag: String) {
+        mPresenter?.checkFavoriteTag(srtTag)
     }
 
     override fun onDestroy() {

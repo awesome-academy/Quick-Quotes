@@ -1,5 +1,7 @@
 package com.truongdc21.quickquotes.ui.fragment
 
+import com.truongdc21.quickquotes.data.model.Quotes
+import android.app.ProgressDialog
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
@@ -21,9 +23,7 @@ import com.truongdc21.quickquotes.ui.activity.TagActivity
 import com.truongdc21.quickquotes.ui.activity.ViewPlayActivity
 import com.truongdc21.quickquotes.ui.adapter.SearchAdapter
 import com.truongdc21.quickquotes.ui.adapter.contract.SearchAdapterContract
-import com.truongdc21.quickquotes.utils.Constant
-import com.truongdc21.quickquotes.utils.showToast
-import com.truongdc21.quickquotes.utils.switchActivity
+import com.truongdc21.quickquotes.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -36,6 +36,7 @@ class SearchFragment:
 
     private var mPresenter: SearchFragmentPresenter? = null
     private val adapterSearch by lazy { SearchAdapter(this) }
+    private var mProgressDialog : ProgressDialog? = null
 
     override fun initViews() {
         binding.apply {
@@ -47,25 +48,19 @@ class SearchFragment:
 
     override fun initData() {
         mPresenter = SearchFragmentPresenter(
-            SearchRepository.getInstace(
-                SearchRemoteSource.getInstance(),
-                SearchLocalSource.getInstance(
-                    SearchDBIplm.getInstance(
-                        MyDatabaseHelper.getInstance(requireContext())
-                    )
-                )
-            )
+            this@SearchFragment.requireContext(),
+            InitRepository.initRepositorySearch(this@SearchFragment.requireContext())
         )
         mPresenter?.setView(this)
         mPresenter?.onStart()
     }
 
     override fun onQueryTextSubmit(text: String?): Boolean {
-        mPresenter?.insertSearchHistory(Search(
-            0,
-            ConstanceDb.COLUMN_HISTORY,
-            text , Constant.LOCAL))
         adapterSearch.filter.filter(text)
+        if (!this@SearchFragment.context.isNetworkAvailable()){
+            showToast(resources.getString(R.string.internet_disconnect))
+            return true
+        }
         return true
     }
 
@@ -92,10 +87,35 @@ class SearchFragment:
     override fun onError() {
     }
 
+    override fun showToast(message: String) {
+        lifecycleScope.launch(Dispatchers.Main){
+            this@SearchFragment.context?.showToast(message)
+        }
+    }
+
     override fun showAdapterListHistory(mListSearch: List<Search>) {
         lifecycleScope.launch(Dispatchers.Main){
             adapterSearch.setDataHistory(mListSearch.reversed())
         }
+    }
+
+    override fun switchActivityViewPlay(mList: List<Quotes>) {
+        this.context?.switchViewPlayActivity(mList , Constant.POSITION_ZERO)
+    }
+
+    override fun loadingApi() {
+        mProgressDialog = ProgressDialog(this@SearchFragment.context)
+        mProgressDialog?.let {
+            it.setCancelable(false)
+            it.show()
+            it.setContentView(R.layout.layout_custom_propressdialog)
+            it.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        }
+    }
+
+    override fun loadingApiSuccess() {
+        mProgressDialog?.dismiss()
     }
 
     override fun removeHistorySuccess() {
@@ -106,21 +126,26 @@ class SearchFragment:
 
     override fun clickQuotes(search: Search) {
         mPresenter?.insertSearchHistory(search)
-        this.context?.switchActivity(ViewPlayActivity())
+        search.text?.let {
+            mPresenter?.clickQuotesSearch(it)
+        }
     }
 
     override fun clickAuthor(search: Search) {
         mPresenter?.insertSearchHistory(search)
-        this.context?.switchActivity(AuthorActivity())
+        search.text?.let {
+            this.context?.switchAuthorActivity(it)
+        }
     }
 
     override fun clickTag(search: Search) {
         mPresenter?.insertSearchHistory(search)
-        this.context?.switchActivity(TagActivity())
+        search.text?.let {
+            this.context?.switchTagActivity(it)
+        }
     }
 
     override fun clickHistory(text: String) {
-        this.context?.switchActivity(SearchActivity())
     }
 
     override fun removeHistory(search: Search) {
