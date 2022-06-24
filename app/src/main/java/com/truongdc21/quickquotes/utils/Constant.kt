@@ -24,4 +24,5 @@ object Constant {
     const val HOUR = 14
     const val MINUTE = 49
     const val KEY_MORNING = "morning"
+    const val URL_TRANSLATE_API = ""
 }

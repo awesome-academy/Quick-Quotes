@@ -1,6 +1,7 @@
 package com.mannan.translateapi;
 
 import android.os.AsyncTask;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import java.io.BufferedReader;
@@ -20,10 +21,11 @@ public class TranslateAPI {
     String langTo = null;
     String word = null;
 
+
     private static final String  URL_Translate = "https://translate.googleapis.com/translate_a/single?";
     private static final String  KeyParam1 = "client=gtx&";
     private static final String  KeyParam2 = "sl=";
-    private static final String  KeyParam3 = "&tl";
+    private static final String  KeyParam3 = "&tl=";
     private static final String  KeyParam4 = "&dt=t&q=";
     private static final String  UTF8 = "UTF-8";
     private static final String  keyRequestProperty = "User-Agent";
@@ -33,7 +35,7 @@ public class TranslateAPI {
 
     public TranslateAPI(String langFrom, String langTo, String text){
         this.langFrom=langFrom;
-        this.langTo=langTo;
+        this.langTo=langTo; 
         this.word=text;
 
         Async async = new Async();
@@ -44,7 +46,7 @@ public class TranslateAPI {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                url = URL_Translate+KeyParam1+KeyParam2+
+                url = URL_Translate + KeyParam1 + KeyParam2 +
                         langFrom + KeyParam3 + langTo + KeyParam4 + URLEncoder.encode(word, UTF8);
                 URL obj = new URL(url);
                 HttpURLConnection con = (HttpURLConnection) obj.openConnection();

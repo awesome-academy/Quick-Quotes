@@ -21,9 +21,9 @@ class SearchFragmentPresenter(
     private var mView : SearchFragmentContact.View? = null
     private var mlistSearch = mutableListOf<Search>()
     private var mlistQuotes = mutableListOf<Quotes>()
-    private var isQuotes : Boolean = false
-    private var isAuthor : Boolean = false
-    private var isTag : Boolean = false
+    var isQuotes : Boolean = false
+    var isAuthor : Boolean = false
+    var isTag : Boolean = false
 
     override fun onStart() {
         getListSearchAPI()
@@ -43,7 +43,7 @@ class SearchFragmentPresenter(
             mView?.showToast(mContext.resources.getString(R.string.internet_disconnect))
             return
         }
-        if (isQuotes || isAuthor || isTag) {
+            if (isQuotes || isAuthor || isTag) {
             mView?.showAdapterListAPI(mlistSearch)
         } else {
             CoroutineScope(Dispatchers.IO).launch{
@@ -98,7 +98,9 @@ class SearchFragmentPresenter(
            override fun onSuccess(data: List<Search>) {
                mView?.showAdapterListHistory(data)
            }
-           override fun onError(exception: Exception?) {}
+           override fun onError(exception: Exception?) {
+
+           }
        })
     }
 

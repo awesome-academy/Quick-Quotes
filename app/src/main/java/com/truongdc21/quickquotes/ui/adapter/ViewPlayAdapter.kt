@@ -35,7 +35,6 @@ class ViewPlayAdapter(
 
     inner class ViewPlayViewHolder(
         private val binding : LayoutItemViewplayBinding):RecyclerView.ViewHolder(binding.root) {
-
         fun bind(itemQuotes: Quotes) {
             binding.apply {
                 imgItemQuotes.showImageGlideWithURL(mContext, itemQuotes.urlImage)
