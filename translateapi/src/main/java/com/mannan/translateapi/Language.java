@@ -1,9 +1,5 @@
 package com.mannan.translateapi;
 
-/**
- * Created by hello on 16-Aug-18.
- */
-
 public class Language {
         public static final String AUTO_DETECT = "auto";
         public static final String AFRIKAANS = "af";
@@ -72,3 +68,4 @@ public class Language {
         public static final String CHINESE_SIMPLIFIED = "zh-CN";
         public static final String CHINESE_TRADITIONAL = "zh-TW";
 }
+

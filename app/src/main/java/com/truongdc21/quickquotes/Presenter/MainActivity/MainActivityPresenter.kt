@@ -1,6 +1,5 @@
 package com.truongdc21.quickquotes.presenter.MainActivity
 
-import android.util.Log
 import com.truongdc21.quickquotes.data.model.Quotes
 import com.truongdc21.quickquotes.data.repository.QuotesRepository
 import com.truongdc21.quickquotes.data.source.remote.OnRemoteResultListener
@@ -25,12 +24,14 @@ class MainActivityPresenter(
     }
 
     override fun getApiList() {
-        mRepoQuotes.getApiQuotesWithTag(Constant.KEY_MORNING , object : OnRemoteResultListener<List<Quotes>>{
+        mRepoQuotes.getApiQuotesWithTag(
+            Constant.KEY_MORNING,
+            object : OnRemoteResultListener<List<Quotes>>{
+
             override fun onSuccess(data: List<Quotes>) {
                 val random = (0..data.size-1).shuffled().last()
                 mView?.showQuotesNotification(data[random])
             }
-
             override fun onError(exception: Exception?) {}
         })
     }

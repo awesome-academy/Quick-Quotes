@@ -9,15 +9,12 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.truongdc21.quickquotes.R
 import com.truongdc21.quickquotes.data.model.Quotes
 import com.truongdc21.quickquotes.ui.activity.AuthorActivity
-import com.truongdc21.quickquotes.ui.activity.SearchActivity
 import com.truongdc21.quickquotes.ui.activity.TagActivity
 import com.truongdc21.quickquotes.ui.activity.ViewPlayActivity
-import java.security.Key
 
 fun Context.showToast(string: String){
     Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
@@ -59,12 +56,6 @@ fun Context.sharedText(title: String, value: String){
     intent.putExtra(Intent.EXTRA_TEXT, value)
     intent.type = "text/plain"
     this.startActivity(Intent.createChooser(intent, title))
-}
-
-fun Context.switchSearchActivity(text: String){
-    val intent = Intent(this, SearchActivity::class.java)
-    intent.putExtra(Constant.PUT_STRING_SEARCH ,text )
-    startActivity(intent)
 }
 
 fun Context?.isNetworkAvailable(): Boolean {
