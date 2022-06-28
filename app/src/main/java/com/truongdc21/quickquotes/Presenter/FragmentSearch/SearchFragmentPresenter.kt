@@ -30,9 +30,7 @@ class SearchFragmentPresenter(
         getListSearchHistory()
     }
 
-    override fun onStop() {
-        getListSearchAPI()
-    }
+    override fun onStop() {}
 
     override fun setView(view: SearchFragmentContact.View?) {
         this.mView = view

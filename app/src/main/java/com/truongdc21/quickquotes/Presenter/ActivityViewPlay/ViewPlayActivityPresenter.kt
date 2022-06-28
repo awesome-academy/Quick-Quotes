@@ -22,11 +22,11 @@ class ViewPlayActivityPresenter(
     ):ViewPlayActivityContract.Presenter{
 
     private var mView : ViewPlayActivityContract.View? = null
-    private var mListQuotes = mutableListOf<Quotes>()
-    private var mListNumberTrabslate = mutableListOf<Int>()
-    private var mListAuthorLocal = mutableListOf<Author>()
-    private var mListTagLocal = mutableListOf<Tag>()
-    private var mPosition : Int? = null
+    var mListQuotes = mutableListOf<Quotes>()
+    var mListNumberTrabslate = mutableListOf<Int>()
+    var mListAuthorLocal = mutableListOf<Author>()
+    var mListTagLocal = mutableListOf<Tag>()
+    var mPosition : Int? = null
 
     override fun onStart() {}
 
